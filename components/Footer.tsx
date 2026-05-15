@@ -7,7 +7,7 @@ export function Footer() {
     <footer className="border-t border-ink/10 bg-chalk/80">
       <div className="page-shell grid gap-12 py-12 md:grid-cols-[1fr_1.2fr]">
         <div>
-          <Link href="/" className="rounded-xl font-serif text-3xl tracking-tight hover:text-umber">
+          <Link href="/" className="rounded-xl font-heading text-3xl tracking-[0.06em] hover:text-umber">
             Kofi Baiden Brushworks
           </Link>
           <p className="mt-5 max-w-sm text-sm leading-7 text-graphite">

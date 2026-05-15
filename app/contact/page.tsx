@@ -17,7 +17,7 @@ export default function ContactPage() {
     <main className="page-shell section-y grid gap-12 lg:grid-cols-[0.8fr_1fr]">
       <section className="reveal">
         <p className="eyebrow">Contact</p>
-        <h1 className="mt-6 font-serif text-6xl leading-none tracking-tight sm:text-7xl">
+        <h1 className="mt-6 heading text-6xl sm:text-7xl">
           Studio inquiries
         </h1>
         <p className="mt-7 max-w-xl text-lg leading-8 text-graphite">

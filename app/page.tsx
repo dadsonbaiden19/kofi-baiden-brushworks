@@ -22,8 +22,9 @@ export default function Home() {
       <section className="page-shell grid min-h-[calc(100vh-5rem)] gap-12 py-12 lg:grid-cols-[0.92fr_1fr] lg:items-center lg:py-20">
         <div className="reveal max-w-3xl">
           <p className="eyebrow">Contemporary artist</p>
-          <h1 className="mt-8 font-serif text-6xl leading-[0.92] tracking-[-0.04em] sm:text-7xl lg:text-8xl">
-            Kofi Baiden Brushworks
+          <h1 className="mt-8 heading-display text-6xl sm:text-7xl lg:text-8xl">
+            <span className="block">Kofi Baiden</span>
+            <span className="block heading-muted">Brushworks</span>
           </h1>
           <p className="mt-8 max-w-xl text-lg leading-8 text-graphite">
             Kofi Baiden is a Ghana-based contemporary visual artist creating restrained, tactile
@@ -56,7 +57,7 @@ export default function Home() {
           <div className="reveal flex flex-col justify-between gap-8 md:flex-row md:items-end">
             <div>
               <p className="eyebrow">Featured artworks</p>
-              <h2 className="mt-5 max-w-2xl font-serif text-5xl leading-none tracking-tight sm:text-6xl">
+              <h2 className="mt-5 max-w-2xl heading text-5xl sm:text-6xl">
                 Recent works selected for close viewing.
               </h2>
             </div>
@@ -75,7 +76,7 @@ export default function Home() {
       <section className="page-shell section-y grid gap-12 lg:grid-cols-[0.8fr_1fr] lg:items-start">
         <div className="reveal">
           <p className="eyebrow">About the artist</p>
-          <h2 className="mt-5 font-serif text-5xl leading-none tracking-tight sm:text-6xl">
+          <h2 className="mt-5 heading text-5xl sm:text-6xl">
             A practice shaped by place, pressure, and time.
           </h2>
         </div>
@@ -99,7 +100,7 @@ export default function Home() {
         <div className="page-shell grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
           <div className="reveal">
             <p className="eyebrow text-clay">Studio inquiries</p>
-            <h2 className="mt-5 max-w-3xl font-serif text-5xl leading-none tracking-tight sm:text-6xl">
+            <h2 className="mt-5 max-w-3xl heading text-5xl sm:text-6xl">
               For commissions, exhibitions, and artwork acquisitions.
             </h2>
             <div className="mt-8 max-w-3xl">

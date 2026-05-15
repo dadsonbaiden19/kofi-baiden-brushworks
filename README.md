@@ -85,3 +85,15 @@ Deployment assumptions for a standard Node.js Next.js app on Hostinger:
 6. Point `kofibaidenbrushworks.com` to the deployed app.
 7. Enable SSL for the domain.
 8. Test the production site, sitemap, robots file, artwork detail pages, and contact/social links after deployment.
+
+## Vercel Deployment Notes
+
+1. Import the GitHub repository into Vercel.
+2. Set environment variables from `.env.example` in the Vercel dashboard (Production).
+3. Build command: `npm run build`
+4. Output directory: leave blank (Next.js default).
+5. Deploy and then test:
+   - `/sitemap.xml`
+   - `/robots.txt`
+   - `/og-image.jpg`
+   - a detail route like `/works/ochre-field-no-3`

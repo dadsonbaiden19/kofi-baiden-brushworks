@@ -18,7 +18,7 @@ export default function AboutPage() {
       <section className="page-shell section-y grid gap-12 lg:grid-cols-[0.85fr_1fr] lg:items-start">
         <div className="reveal">
           <p className="eyebrow">Biography</p>
-          <h1 className="mt-6 font-serif text-6xl leading-none tracking-tight sm:text-7xl">
+          <h1 className="mt-6 heading text-6xl sm:text-7xl">
             Kofi Baiden
           </h1>
           <p className="mt-6 max-w-md text-lg leading-8 text-graphite">
@@ -49,7 +49,7 @@ export default function AboutPage() {
         <div className="page-shell section-y grid gap-10 md:grid-cols-3">
           {aboutHighlights.map(({ title, copy }) => (
             <article key={title} className="reveal rounded-soft border border-ink/10 bg-bone/35 p-6 shadow-soft">
-              <h2 className="font-serif text-3xl">{title}</h2>
+              <h2 className="heading text-3xl">{title}</h2>
               <p className="mt-4 text-sm leading-7 text-graphite">{copy}</p>
             </article>
           ))}

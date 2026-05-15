@@ -1,6 +1,7 @@
 node_modules/
 .next/
 out/
+.vercel/
 next-dev.*.log
 next-start.*.log
 npm-debug.log*

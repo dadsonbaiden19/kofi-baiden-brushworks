@@ -8,7 +8,7 @@ export function ArtworkDetailLayout({ artwork }: { artwork: Work }) {
       <ImageCarousel images={artwork.images} title={artwork.title} alt={artwork.alt} />
       <section className="reveal reveal-delay-1">
         <p className="eyebrow">Artwork detail</p>
-        <h1 className="mt-6 max-w-xl font-serif text-5xl leading-[0.95] tracking-tight sm:text-6xl">
+        <h1 className="mt-6 max-w-xl heading text-5xl sm:text-6xl">
           {artwork.title}
         </h1>
         <dl className="mt-10 grid gap-5 border-y border-ink/10 py-8 text-sm">

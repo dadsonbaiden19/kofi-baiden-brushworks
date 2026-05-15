@@ -21,6 +21,7 @@ const config: Config = {
       fontFamily: {
         sans: ["var(--font-inter)", "Inter", "sans-serif"],
         serif: ["var(--font-cormorant)", "Cormorant Garamond", "serif"],
+        heading: ["var(--font-bebas)", "Bebas Neue", "sans-serif"],
       },
       boxShadow: {
         artwork: "var(--shadow-artwork)",

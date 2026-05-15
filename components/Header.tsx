@@ -18,7 +18,7 @@ export function Header() {
   return (
     <header className="reveal sticky top-0 z-40 border-b border-ink/10 bg-bone/78 shadow-[0_1px_0_rgb(var(--color-ink)/0.04)] backdrop-blur-xl">
       <nav className="page-shell flex min-h-20 flex-wrap items-center justify-between gap-3 py-4 sm:flex-nowrap sm:gap-8 sm:py-0">
-        <Link href="/" className="rounded-xl font-serif text-2xl leading-none tracking-tight">
+        <Link href="/" className="rounded-xl font-heading text-2xl leading-none tracking-[0.06em]">
           Kofi Baiden
         </Link>
         <div className="flex w-full items-center justify-between gap-2 sm:w-auto sm:justify-end sm:gap-4">

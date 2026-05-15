@@ -83,6 +83,12 @@ body {
   }
 }
 
+@layer utilities {
+  .font-heading {
+    font-family: var(--font-bebas), "Bebas Neue", ui-sans-serif, system-ui, sans-serif;
+  }
+}
+
 @layer components {
   .page-shell {
     @apply mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-12;
@@ -103,6 +109,29 @@ body {
   .surface-soft {
     @apply border border-ink/10 bg-chalk/75 shadow-soft backdrop-blur-sm;
     border-radius: var(--radius-soft);
+  }
+
+  .heading {
+    @apply font-heading leading-[0.9] tracking-[0.02em] text-ink;
+  }
+
+  .heading-display {
+    @apply font-heading leading-[0.88] tracking-[0.06em] text-ink;
+    text-transform: uppercase;
+  }
+
+  .heading-muted {
+    opacity: 0.55;
+    color: rgb(var(--color-ink));
+    -webkit-text-stroke: 1px currentColor;
+    paint-order: stroke fill;
+  }
+
+  @supports not (-webkit-text-stroke: 1px #000) {
+    .heading-muted {
+      opacity: 0.55;
+      -webkit-text-stroke: initial;
+    }
   }
 
   .btn-primary,

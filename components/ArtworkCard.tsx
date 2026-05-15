@@ -33,7 +33,7 @@ export function ArtworkCard({ artwork }: { artwork: Work }) {
         </div>
         <div className="mt-6 flex items-start justify-between gap-6 border-t border-ink/10 pt-5">
           <div>
-            <h2 className="font-serif text-3xl leading-tight tracking-tight">{artwork.title}</h2>
+            <h2 className="heading text-3xl leading-tight">{artwork.title}</h2>
             <p className="mt-3 text-sm leading-6 text-graphite">
               {artwork.year} · {artwork.medium}
             </p>

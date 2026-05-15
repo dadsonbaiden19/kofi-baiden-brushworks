@@ -18,7 +18,7 @@ export function GalleryGrid({ works }: { works: GalleryWork[] }) {
             />
           </div>
           <div className="mt-5 border-t border-ink/10 pt-4">
-            <h2 className="font-serif text-2xl leading-tight tracking-tight">{work.title}</h2>
+            <h2 className="heading text-2xl leading-tight">{work.title}</h2>
             <p className="mt-1 text-sm text-umber">{work.year}</p>
           </div>
         </article>
