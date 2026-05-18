@@ -318,6 +318,131 @@ body::before {
   .image-pad {
     padding: clamp(0.75rem, 1.5vw, 1.25rem);
   }
+
+  .route-transition {
+    animation: route-enter 0.68s var(--ease-premium) both;
+  }
+
+  .artwork-load-shell {
+    @apply relative block overflow-hidden rounded-[inherit];
+  }
+
+  .artwork-load-shell .responsive-artwork-image {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(8px) scale(0.992);
+    transition:
+      opacity 0.85s var(--ease-premium),
+      filter 0.85s var(--ease-premium),
+      transform 0.85s var(--ease-premium);
+  }
+
+  .artwork-load-shell.is-loaded .responsive-artwork-image {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0) scale(1);
+  }
+
+  .artwork-loading-veil {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 1;
+    background:
+      linear-gradient(110deg, transparent 0%, rgb(var(--color-chalk) / 0.42) 42%, transparent 76%),
+      radial-gradient(circle at 42% 20%, rgb(var(--color-clay) / 0.1), transparent 34%),
+      rgb(var(--color-gallery) / 0.44);
+    background-size: 220% 100%, 100% 100%, 100% 100%;
+    mix-blend-mode: soft-light;
+    animation: loading-wash 2.8s var(--ease-premium) infinite;
+    transition: opacity 0.7s var(--ease-premium);
+  }
+
+  .artwork-load-shell.is-loaded .artwork-loading-veil {
+    opacity: 0;
+  }
+
+  .loading-scene {
+    animation: route-enter 0.7s var(--ease-premium) both;
+  }
+
+  .loading-ledger {
+    @apply grid gap-4 border-y border-ink/10 py-8;
+  }
+
+  .loading-ledger span,
+  .loading-line {
+    display: block;
+    height: 0.65rem;
+    border-radius: 999px;
+    background:
+      linear-gradient(100deg, rgb(var(--color-gallery) / 0.42), rgb(var(--color-chalk) / 0.8), rgb(var(--color-gallery) / 0.42));
+    background-size: 220% 100%;
+    animation: loading-wash 2.8s var(--ease-premium) infinite;
+  }
+
+  .loading-ledger span:nth-child(1) {
+    width: 42%;
+  }
+
+  .loading-ledger span:nth-child(2) {
+    width: 72%;
+  }
+
+  .loading-ledger span:nth-child(3) {
+    width: 56%;
+  }
+
+  .loading-artwork-plate {
+    aspect-ratio: 4 / 5;
+    border-radius: inherit;
+    background:
+      linear-gradient(120deg, rgb(var(--color-gallery) / 0.58), rgb(var(--color-chalk) / 0.78), rgb(var(--color-gallery) / 0.5)),
+      radial-gradient(circle at 20% 18%, rgb(var(--color-clay) / 0.12), transparent 36%);
+    background-size: 220% 100%, 100% 100%;
+    animation: loading-wash 3.2s var(--ease-premium) infinite;
+  }
+
+  .loading-artwork-plate.is-wide {
+    aspect-ratio: 5 / 4;
+  }
+
+  .loading-artwork-plate.is-square {
+    aspect-ratio: 1 / 1;
+  }
+
+  .not-found-scene {
+    overflow: hidden;
+  }
+
+  .not-found-composition {
+    position: relative;
+    min-height: clamp(22rem, 48vw, 38rem);
+  }
+
+  .not-found-plate {
+    position: absolute;
+    border: 1px solid rgb(var(--color-ink) / 0.1);
+    border-radius: 2rem;
+    background:
+      linear-gradient(135deg, rgb(var(--color-chalk) / 0.88), rgb(var(--color-gallery) / 0.56)),
+      radial-gradient(circle at 34% 20%, rgb(var(--color-clay) / 0.16), transparent 34%);
+    box-shadow: var(--shadow-artwork);
+  }
+
+  .not-found-plate-primary {
+    inset: 6% 12% 10% 8%;
+  }
+
+  .not-found-plate-secondary {
+    inset: 22% 4% 18% 42%;
+    opacity: 0.72;
+    transform: translateY(1rem);
+  }
+
+  .not-found-composition p {
+    @apply absolute bottom-2 left-8 text-xs uppercase tracking-[0.22em] text-umber;
+  }
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -354,6 +479,28 @@ body::before {
   }
 }
 
+@keyframes route-enter {
+  from {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+@keyframes loading-wash {
+  0% {
+    background-position: 120% 0, 0 0, 0 0;
+  }
+  100% {
+    background-position: -120% 0, 0 0, 0 0;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -370,6 +517,20 @@ body::before {
 
   .reveal {
     animation: none;
+  }
+
+  .route-transition,
+  .loading-scene,
+  .loading-artwork-plate,
+  .loading-ledger span,
+  .loading-line,
+  .artwork-loading-veil {
+    animation: none;
+  }
+
+  .artwork-load-shell .responsive-artwork-image {
+    filter: none;
+    transform: none;
   }
 
   .group:hover .work-preview-image-3 {
