@@ -14,7 +14,7 @@ export const metadata: Metadata = createPageMetadata({
 
 export default function AboutPage() {
   return (
-    <main>
+    <main id="main-content">
       <section className="page-shell section-y grid gap-12 lg:grid-cols-[0.85fr_1fr] lg:items-start">
         <div className="reveal">
           <p className="eyebrow">Biography</p>
@@ -27,15 +27,17 @@ export default function AboutPage() {
           <SocialLinks className="mt-8" />
         </div>
         <div className="reveal reveal-delay-1">
-          <div className="overflow-hidden rounded-artwork bg-gallery shadow-artwork">
-            <Image
-              src={resolveImageUrl("/artist/kofi-baiden-portrait.svg")}
-              alt="Editorial portrait of Kofi Baiden"
-              width={900}
-              height={1125}
-              quality={90}
-              className="aspect-[4/5] h-full w-full object-cover"
-            />
+          <div className="artwork-frame">
+            <div className="artwork-core">
+              <Image
+                src={resolveImageUrl("/artist/kofi-baiden-portrait.svg")}
+                alt="Editorial portrait of Kofi Baiden"
+                width={900}
+                height={1125}
+                quality={90}
+                className="aspect-[4/5] h-full w-full object-cover"
+              />
+            </div>
           </div>
           <div className="mt-10 space-y-7 text-lg leading-8 text-graphite">
             {artistBio.map((paragraph) => (

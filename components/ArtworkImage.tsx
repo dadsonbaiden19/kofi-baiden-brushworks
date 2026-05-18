@@ -11,18 +11,20 @@ type ArtworkImageProps = {
 
 export function ArtworkImage({ src, alt, priority, className, imageClassName }: ArtworkImageProps) {
   return (
-    <div className={`relative overflow-hidden rounded-artwork bg-gallery ${className ?? ""}`}>
-      <Image
-        src={resolveImageUrl(src)}
-        alt={alt}
-        fill
-        priority={priority}
-        quality={90}
-        sizes="(min-width: 1024px) 45vw, 100vw"
-        className={`transition-transform duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${
-          imageClassName ?? "object-cover"
-        }`}
-      />
+    <div className={`artwork-frame ${className ?? ""}`}>
+      <div className="artwork-core h-full w-full">
+        <Image
+          src={resolveImageUrl(src)}
+          alt={alt}
+          fill
+          priority={priority}
+          quality={90}
+          sizes="(min-width: 1024px) 45vw, 100vw"
+          className={`transition-transform duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${
+            imageClassName ?? "object-cover"
+          }`}
+        />
+      </div>
     </div>
   );
 }

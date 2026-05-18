@@ -18,7 +18,7 @@ export default function Home() {
   const heroArtwork = featuredWorks[0];
 
   return (
-    <main>
+    <main id="main-content">
       <section className="page-shell grid min-h-[calc(100vh-5rem)] gap-12 py-12 lg:grid-cols-[0.92fr_1fr] lg:items-center lg:py-20">
         <div className="reveal max-w-3xl">
           <p className="eyebrow">Contemporary artist</p>

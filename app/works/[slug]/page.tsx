@@ -42,7 +42,7 @@ export default async function ArtworkDetailPage({ params }: ArtworkPageProps) {
   }
 
   return (
-    <main className="page-shell section-y">
+    <main id="main-content" className="page-shell section-y">
       <JsonLd
         data={{
           "@context": "https://schema.org",

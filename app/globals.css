@@ -53,12 +53,35 @@ body {
     color var(--duration-premium) var(--ease-premium);
 }
 
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  pointer-events: none;
+  opacity: 0.045;
+  background-image:
+    radial-gradient(circle at 1px 1px, rgb(var(--color-ink) / 0.32) 1px, transparent 0),
+    linear-gradient(135deg, rgb(var(--color-chalk) / 0.18), transparent 42%);
+  background-size: 18px 18px, 100% 100%;
+  mix-blend-mode: multiply;
+}
+
+.dark body::before {
+  opacity: 0.035;
+  mix-blend-mode: screen;
+}
+
 ::selection {
   background: rgb(var(--color-ink));
   color: rgb(var(--color-chalk));
 }
 
 @layer base {
+  body {
+    font-variant-numeric: oldstyle-nums;
+  }
+
   button,
   input,
   select,
@@ -87,6 +110,10 @@ body {
   .font-heading {
     font-family: var(--font-bebas), "Bebas Neue", ui-sans-serif, system-ui, sans-serif;
   }
+
+  .text-balance {
+    text-wrap: balance;
+  }
 }
 
 @layer components {
@@ -107,27 +134,41 @@ body {
   }
 
   .surface-soft {
-    @apply border border-ink/10 bg-chalk/75 shadow-soft backdrop-blur-sm;
+    @apply border border-ink/10 bg-chalk/75 shadow-soft;
     border-radius: var(--radius-soft);
+    box-shadow:
+      inset 0 1px 0 rgb(var(--color-chalk) / 0.48),
+      var(--shadow-soft);
   }
 
   .heading {
-    @apply font-heading leading-[0.9] tracking-[0.02em] text-ink;
+    @apply font-heading leading-[0.9] tracking-[0.03em] text-ink text-balance;
   }
 
   .heading-display {
-    @apply font-heading leading-[0.88] tracking-[0.06em] text-ink;
+    @apply font-heading leading-[0.88] tracking-[0.065em] text-ink text-balance;
     text-transform: uppercase;
   }
 
   .heading-muted {
-    opacity: 0.55;
+    opacity: 0.58;
     color: rgb(var(--color-ink));
     -webkit-text-stroke: 1px currentColor;
     paint-order: stroke fill;
   }
 
-  @supports not (-webkit-text-stroke: 1px #000) {
+  @media (max-width: 640px) {
+    .heading-display {
+      letter-spacing: 0.04em;
+    }
+
+    .heading-muted {
+      opacity: 0.62;
+      -webkit-text-stroke: 0;
+    }
+  }
+
+  @supports not (-webkit-text-stroke: 1px currentColor) {
     .heading-muted {
       opacity: 0.55;
       -webkit-text-stroke: initial;
@@ -156,6 +197,26 @@ body {
 
   .social-link {
     @apply gap-2 border-ink/15 bg-chalk/60 text-ink hover:-translate-y-0.5 hover:border-ink/25 hover:bg-gallery/65 hover:shadow-artwork;
+  }
+
+  .skip-link {
+    @apply fixed left-4 top-4 z-50 -translate-y-20 rounded-full border border-ink/15 bg-chalk px-4 py-2 text-sm font-medium text-ink shadow-soft;
+  }
+
+  .skip-link:focus {
+    transform: translateY(0);
+  }
+
+  .artwork-frame {
+    @apply rounded-[1.9rem] border border-ink/10 bg-chalk/45 p-1.5 shadow-artwork;
+    box-shadow:
+      inset 0 1px 0 rgb(var(--color-chalk) / 0.45),
+      var(--shadow-artwork);
+  }
+
+  .artwork-core {
+    @apply relative overflow-hidden rounded-[1.45rem] bg-gallery;
+    box-shadow: inset 0 1px 1px rgb(var(--color-chalk) / 0.32);
   }
 
   .text-link {
@@ -207,7 +268,9 @@ body {
     inset: 0;
     opacity: 0;
   }
+}
 
+@media (hover: hover) and (pointer: fine) {
   .group:hover .work-preview-image-2 {
     z-index: 2;
     opacity: 1;

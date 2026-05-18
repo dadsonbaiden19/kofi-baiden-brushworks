@@ -91,6 +91,9 @@ export default function RootLayout({
         </Script>
       </head>
       <body className="font-sans antialiased">
+        <a href="#main-content" className="skip-link">
+          Skip to content
+        </a>
         <JsonLd
           data={{
             "@context": "https://schema.org",

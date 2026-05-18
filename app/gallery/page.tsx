@@ -12,7 +12,7 @@ export const metadata: Metadata = createPageMetadata({
 
 export default function GalleryPage() {
   return (
-    <main className="page-shell section-y">
+    <main id="main-content" className="page-shell section-y">
       <div className="reveal max-w-3xl">
         <p className="eyebrow">Historical Gallery</p>
         <h1 className="mt-6 heading text-6xl sm:text-7xl">

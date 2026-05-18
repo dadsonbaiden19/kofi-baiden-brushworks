@@ -25,8 +25,8 @@ export function ImageCarousel({ images, title, alt }: ImageCarouselProps) {
 
   return (
     <section className="reveal lg:sticky lg:top-28">
-      <div className="surface-soft p-3">
-        <div className="relative aspect-[4/5] overflow-hidden rounded-[16px] bg-gallery">
+      <div className="artwork-frame">
+        <div className="artwork-core aspect-[4/5]">
           <Image
             key={activeImage}
             src={resolveImageUrl(activeImage)}
