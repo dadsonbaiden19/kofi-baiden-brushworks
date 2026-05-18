@@ -1,17 +1,24 @@
+import Link from "next/link";
 import { formatGhs, type Work } from "@/data/works";
 import { CollectorNotes } from "./CollectorNotes";
 import { ImageCarousel } from "./ImageCarousel";
 
 export function ArtworkDetailLayout({ artwork }: { artwork: Work }) {
   return (
-    <div className="grid gap-12 lg:grid-cols-[1.08fr_0.72fr] lg:items-start">
+    <div className="grid gap-12 lg:grid-cols-[minmax(0,1.16fr)_minmax(22rem,0.64fr)] lg:items-start">
       <ImageCarousel images={artwork.images} title={artwork.title} alt={artwork.alt} />
       <section className="reveal reveal-delay-1">
-        <p className="eyebrow">Artwork detail</p>
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <p className="eyebrow">Artwork detail</p>
+          <Link href="/works" className="text-link">
+            Back to works
+          </Link>
+        </div>
         <h1 className="mt-6 max-w-xl heading text-5xl sm:text-6xl">
           {artwork.title}
         </h1>
-        <dl className="mt-10 grid gap-5 border-y border-ink/10 py-8 text-sm">
+        <p className="mt-6 max-w-lg text-lg leading-8 text-graphite">{artwork.description}</p>
+        <dl className="surface-quiet mt-10 grid gap-5 py-8 text-sm">
           <div className="flex justify-between gap-6">
             <dt className="text-umber">Year</dt>
             <dd className="text-right text-ink">{artwork.year}</dd>
@@ -33,8 +40,7 @@ export function ArtworkDetailLayout({ artwork }: { artwork: Work }) {
             <dd className="text-right text-ink">{formatGhs(artwork.priceGhs)}</dd>
           </div>
         </dl>
-        <p className="mt-8 text-lg leading-8 text-graphite">{artwork.description}</p>
-        <div className="mt-8">
+        <div className="mt-8 max-w-lg">
           <CollectorNotes compact />
         </div>
         {artwork.availability === "Available" ? (

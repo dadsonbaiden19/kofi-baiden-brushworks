@@ -19,7 +19,7 @@ export default function Home() {
 
   return (
     <main id="main-content">
-      <section className="page-shell grid min-h-[calc(100vh-5rem)] gap-12 py-12 lg:grid-cols-[0.92fr_1fr] lg:items-center lg:py-20">
+      <section className="page-shell grid min-h-[calc(100dvh-5rem)] gap-12 py-12 lg:grid-cols-[0.86fr_1.14fr] lg:items-center lg:py-20">
         <div className="reveal max-w-3xl">
           <p className="eyebrow">Contemporary artist</p>
           <h1 className="mt-8 heading-display text-6xl sm:text-7xl lg:text-8xl">
@@ -39,7 +39,7 @@ export default function Home() {
             </Link>
           </div>
         </div>
-        <div className="reveal reveal-delay-2 lg:pl-8">
+        <div className="reveal reveal-delay-2 lg:pl-10">
           <ArtworkImage
             src={heroArtwork.images[0]}
             alt={`${heroArtwork.title} by Kofi Baiden`}
@@ -65,10 +65,21 @@ export default function Home() {
               View all works
             </Link>
           </div>
-          <div className="mt-14 grid gap-10 md:grid-cols-3">
-            {featuredWorks.map((artwork) => (
-              <ArtworkCard key={artwork.slug} artwork={artwork} />
-            ))}
+          <div className="mt-[4.5rem] grid gap-x-10 gap-y-16 lg:grid-cols-12">
+            {featuredWorks.map((artwork, index) => {
+              const placement =
+                index === 0
+                  ? "lg:col-span-6"
+                  : index === 1
+                    ? "lg:col-span-3 lg:pt-20"
+                    : "lg:col-span-3 lg:pt-8";
+
+              return (
+                <div key={artwork.slug} className={placement}>
+                  <ArtworkCard artwork={artwork} index={index} />
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>

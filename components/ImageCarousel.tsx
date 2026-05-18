@@ -40,20 +40,25 @@ export function ImageCarousel({ images, title, alt }: ImageCarouselProps) {
       </div>
 
       {hasMultipleImages ? (
-        <div className="mt-5 flex items-center justify-between gap-4">
-          <div className="flex gap-2">
-            {images.map((image, index) => (
-              <button
-                key={image}
-                type="button"
-                aria-label={`Show image ${index + 1} of ${title}`}
-                aria-current={activeIndex === index}
-                onClick={() => setActiveIndex(index)}
-                className={`h-2.5 rounded-full border border-ink/20 ${
-                  activeIndex === index ? "w-9 bg-ink" : "w-2.5 bg-transparent"
-                }`}
-              />
-            ))}
+        <div className="mt-5 flex flex-wrap items-center justify-between gap-4 border-t border-ink/10 pt-5">
+          <div className="flex items-center gap-4">
+            <span className="metadata-label">
+              {String(activeIndex + 1).padStart(2, "0")} / {String(images.length).padStart(2, "0")}
+            </span>
+            <div className="flex gap-2">
+              {images.map((image, index) => (
+                <button
+                  key={image}
+                  type="button"
+                  aria-label={`Show image ${index + 1} of ${title}`}
+                  aria-current={activeIndex === index}
+                  onClick={() => setActiveIndex(index)}
+                  className={`h-2.5 rounded-full border border-ink/20 ${
+                    activeIndex === index ? "w-9 bg-ink" : "w-2.5 bg-transparent"
+                  }`}
+                />
+              ))}
+            </div>
           </div>
           <div className="flex gap-2">
             <button type="button" onClick={showPrevious} className="btn-secondary min-h-10 px-4 py-2">

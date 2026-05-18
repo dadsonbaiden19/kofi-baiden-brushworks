@@ -3,8 +3,9 @@ import Link from "next/link";
 import { formatGhs, type Work } from "@/data/works";
 import { resolveImageUrl } from "@/lib/images";
 
-export function ArtworkCard({ artwork }: { artwork: Work }) {
+export function ArtworkCard({ artwork, index }: { artwork: Work; index?: number }) {
   const isSold = artwork.availability === "Sold";
+  const catalogueNumber = typeof index === "number" ? String(index + 1).padStart(2, "0") : null;
 
   return (
     <article className="group reveal">
@@ -33,8 +34,11 @@ export function ArtworkCard({ artwork }: { artwork: Work }) {
             ) : null}
           </div>
         </div>
-        <div className="mt-6 flex items-start justify-between gap-6 border-t border-ink/10 pt-5">
+        <div className="catalogue-rule mt-6 flex items-start justify-between gap-6">
           <div>
+            {catalogueNumber ? (
+              <p className="metadata-label mb-3">{catalogueNumber}</p>
+            ) : null}
             <h2 className="heading text-3xl leading-tight">{artwork.title}</h2>
             <p className="mt-3 text-sm leading-6 text-graphite">
               {artwork.year} · {artwork.medium}
