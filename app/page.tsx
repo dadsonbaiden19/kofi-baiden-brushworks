@@ -44,7 +44,7 @@ export default function Home() {
             src={heroArtwork.images[0]}
             alt={`${heroArtwork.title} by Kofi Baiden`}
             priority
-            className="aspect-[4/5] shadow-artwork"
+            className="shadow-artwork"
           />
           <p className="mt-4 text-sm text-umber">
             {heroArtwork.title}, {heroArtwork.year}

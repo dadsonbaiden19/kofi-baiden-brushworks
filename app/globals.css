@@ -224,7 +224,7 @@ body::before {
   }
 
   .artwork-core {
-    @apply relative overflow-hidden rounded-[1.45rem] bg-gallery;
+    @apply relative rounded-[1.45rem] bg-gallery;
     box-shadow: inset 0 1px 1px rgb(var(--color-chalk) / 0.32);
   }
 
@@ -300,8 +300,23 @@ body::before {
 
   .work-preview-image {
     position: absolute;
-    inset: 0;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: auto;
     opacity: 0;
+  }
+
+  .responsive-artwork-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    object-fit: contain;
+  }
+
+  .image-pad {
+    padding: clamp(0.75rem, 1.5vw, 1.25rem);
   }
 }
 

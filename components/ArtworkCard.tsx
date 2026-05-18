@@ -1,7 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import { formatGhs, type Work } from "@/data/works";
-import { resolveImageUrl } from "@/lib/images";
+import { FlexibleImage } from "./FlexibleImage";
 
 export function ArtworkCard({ artwork, index }: { artwork: Work; index?: number }) {
   const isSold = artwork.availability === "Sold";
@@ -11,19 +10,16 @@ export function ArtworkCard({ artwork, index }: { artwork: Work; index?: number 
     <article className="group reveal">
       <Link href={`/works/${artwork.slug}`} className="block rounded-artwork">
         <div className="artwork-frame group-hover:-translate-y-1 group-hover:shadow-soft">
-          <div className="artwork-core aspect-[4/5]">
+          <div className="artwork-core">
             {artwork.images.slice(0, 3).map((image, index) => (
-              <Image
+              <FlexibleImage
                 key={image}
-                src={resolveImageUrl(image)}
+                src={image}
                 alt={index === 0 ? artwork.alt : `${artwork.alt}, alternate view ${index + 1}`}
-                fill
-                quality={88}
-                sizes="(min-width: 1280px) 28vw, (min-width: 768px) 42vw, 100vw"
                 className={
                   index === 0
-                    ? "object-contain p-4 group-hover:scale-[1.02]"
-                    : `work-preview-image work-preview-image-${index + 1} object-contain p-4 group-hover:scale-[1.02]`
+                    ? "image-pad group-hover:scale-[1.02]"
+                    : `work-preview-image work-preview-image-${index + 1} image-pad group-hover:scale-[1.02]`
                 }
               />
             ))}

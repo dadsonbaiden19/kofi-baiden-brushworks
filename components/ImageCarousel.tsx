@@ -1,8 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { useState } from "react";
-import { resolveImageUrl } from "@/lib/images";
+import { FlexibleImage } from "./FlexibleImage";
 
 type ImageCarouselProps = {
   images: string[];
@@ -26,15 +25,13 @@ export function ImageCarousel({ images, title, alt }: ImageCarouselProps) {
   return (
     <section className="reveal lg:sticky lg:top-28">
       <div className="artwork-frame">
-        <div className="artwork-core aspect-[4/5]">
-          <Image
+        <div className="artwork-core">
+          <FlexibleImage
             key={activeImage}
-            src={resolveImageUrl(activeImage)}
+            src={activeImage}
             alt={activeIndex === 0 ? alt : `${alt}, alternate view ${activeIndex + 1}`}
-            fill
-            quality={92}
-            sizes="(min-width: 1024px) 58vw, 100vw"
-            className="object-contain p-4"
+            priority={activeIndex === 0}
+            className="image-pad mx-auto"
           />
         </div>
       </div>

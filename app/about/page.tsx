@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import { FlexibleImage } from "@/components/FlexibleImage";
 import { SocialLinks } from "@/components/SocialLinks";
 import { aboutHighlights, artistBio } from "@/data/about";
-import { resolveImageUrl } from "@/lib/images";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
@@ -29,13 +28,10 @@ export default function AboutPage() {
         <div className="reveal reveal-delay-1">
           <div className="artwork-frame">
             <div className="artwork-core">
-              <Image
-                src={resolveImageUrl("/artist/kofi-baiden-portrait.svg")}
+              <FlexibleImage
+                src="/artist/kofi-baiden-portrait.svg"
                 alt="Editorial portrait of Kofi Baiden"
-                width={900}
-                height={1125}
-                quality={90}
-                className="aspect-[4/5] h-full w-full object-cover"
+                className="image-pad"
               />
             </div>
           </div>

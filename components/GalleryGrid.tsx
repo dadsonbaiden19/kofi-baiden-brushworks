@@ -1,6 +1,5 @@
-import Image from "next/image";
 import type { GalleryWork } from "@/data/gallery";
-import { resolveImageUrl } from "@/lib/images";
+import { FlexibleImage } from "./FlexibleImage";
 
 export function GalleryGrid({ works }: { works: GalleryWork[] }) {
   return (
@@ -8,14 +7,11 @@ export function GalleryGrid({ works }: { works: GalleryWork[] }) {
       {works.map((work, index) => (
         <article key={`${work.title}-${work.year}`} className="reveal">
           <div className="artwork-frame shadow-soft hover:-translate-y-1">
-            <div className="artwork-core aspect-[4/5]">
-              <Image
-                src={resolveImageUrl(work.image)}
+            <div className="artwork-core">
+              <FlexibleImage
+                src={work.image}
                 alt={work.alt}
-                fill
-                quality={88}
-                sizes="(min-width: 1280px) 22vw, (min-width: 1024px) 30vw, (min-width: 640px) 45vw, 100vw"
-                className="object-contain p-4 hover:scale-[1.015]"
+                className="image-pad hover:scale-[1.015]"
               />
             </div>
           </div>
