@@ -6,7 +6,7 @@ import { studioContact } from "@/data/contact";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Contact | Kofi Baiden Brushworks",
+  title: "Contact",
   description:
     "Contact Kofi Baiden Brushworks for commissions, exhibitions, artwork acquisitions, and worldwide shipping quotes.",
   path: "/contact",

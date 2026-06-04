@@ -20,16 +20,16 @@ export function Footer() {
           <div>
             <h2 className="eyebrow">Studio</h2>
             <div className="mt-5 grid gap-3 text-graphite">
-              <Link href="/works" className="hover:text-ink">Works</Link>
-              <Link href="/gallery" className="hover:text-ink">Gallery</Link>
-              <Link href="/about" className="hover:text-ink">Biography</Link>
-              <Link href="/contact" className="hover:text-ink">Inquiries</Link>
+              <Link href="/works" className="inline-flex min-h-11 items-center hover:text-ink">Works</Link>
+              <Link href="/gallery" className="inline-flex min-h-11 items-center hover:text-ink">Gallery</Link>
+              <Link href="/about" className="inline-flex min-h-11 items-center hover:text-ink">Biography</Link>
+              <Link href="/contact" className="inline-flex min-h-11 items-center hover:text-ink">Inquiries</Link>
             </div>
           </div>
           <div>
             <h2 className="eyebrow">Contact</h2>
             <div className="mt-5 grid gap-3 text-graphite">
-              <a href={`mailto:${studioContact.email}`} className="hover:text-ink">
+              <a href={`mailto:${studioContact.email}`} className="inline-flex min-h-11 items-center break-all hover:text-ink">
                 {studioContact.email}
               </a>
               <span>{studioContact.location}</span>

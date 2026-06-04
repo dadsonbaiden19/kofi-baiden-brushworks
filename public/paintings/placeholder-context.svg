@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1100" role="img" aria-labelledby="title desc">
+  <title id="title">Context image placeholder</title>
+  <desc id="desc">Temporary room-view placeholder for artwork scale and setting.</desc>
+  <defs>
+    <linearGradient id="wall" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#f4eee3"/>
+      <stop offset="1" stop-color="#dfd0ba"/>
+    </linearGradient>
+    <linearGradient id="floor" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#c7aa86"/>
+      <stop offset="1" stop-color="#a68361"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="760" fill="url(#wall)"/>
+  <rect y="760" width="1600" height="340" fill="url(#floor)"/>
+  <rect x="500" y="150" width="600" height="520" rx="14" fill="#fbf8f2" stroke="#211d18" stroke-opacity="0.22" stroke-width="10"/>
+  <path d="M620 510c95-188 204-268 326-238 95 23 137 105 118 178-23 88-126 158-310 210-62 18-124 19-170 4 10-42 22-94 36-154Z" fill="#b47b4b" opacity="0.42"/>
+  <path d="M612 420c94-80 189-109 286-86 72 17 129 54 172 111" fill="none" stroke="#191612" stroke-width="18" stroke-linecap="round" opacity="0.38"/>
+  <rect x="300" y="760" width="1000" height="26" fill="#33291f" opacity="0.15"/>
+  <text x="800" y="930" text-anchor="middle" fill="#6f5845" font-family="Arial, sans-serif" font-size="34" letter-spacing="5">CONTEXT IMAGE PLACEHOLDER</text>
+</svg>

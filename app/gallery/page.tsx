@@ -4,9 +4,9 @@ import { galleryWorks } from "@/data/gallery";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Historical Gallery | Kofi Baiden Brushworks",
+  title: "Sold Works",
   description:
-    "Explore earlier archive works by Kofi Baiden Brushworks, a Ghana-based contemporary artist working across painting and mixed media.",
+    "Explore sold paintings by Kofi Baiden Brushworks, a Ghana-based contemporary artist working across colour, rhythm, figure, and movement.",
   path: "/gallery",
 });
 
@@ -14,13 +14,13 @@ export default function GalleryPage() {
   return (
     <main id="main-content" className="page-shell section-y">
       <div className="reveal max-w-3xl">
-        <p className="eyebrow">Historical Gallery</p>
+        <p className="eyebrow">Gallery</p>
         <h1 className="mt-6 heading text-6xl sm:text-7xl">
-          Archive works, 1990s-2026
+          Sold Works
         </h1>
         <p className="mt-6 text-lg leading-8 text-graphite">
-          A quiet archive of earlier works and studies. Each gallery entry is intentionally
-          simple: one image, one title, and the year of the work.
+          A focused archive of sold paintings from the studio. Click any work to inspect it in the
+          full-screen viewer.
         </p>
       </div>
       <GalleryGrid works={galleryWorks} />

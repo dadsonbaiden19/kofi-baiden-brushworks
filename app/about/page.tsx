@@ -5,7 +5,7 @@ import { aboutHighlights, artistBio } from "@/data/about";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "About the Artist | Kofi Baiden Brushworks",
+  title: "About the Artist",
   description:
     "Learn about Kofi Baiden, a Ghana-based contemporary artist working across painting and mixed media.",
   path: "/about",

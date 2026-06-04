@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type CSSProperties, type MouseEvent } from "react";
 import { FlexibleImage } from "./FlexibleImage";
+import { ChevronLeftIcon, ChevronRightIcon } from "./Icons";
 
 type ImageCarouselProps = {
   images: string[];
@@ -10,29 +11,105 @@ type ImageCarouselProps = {
 };
 
 export function ImageCarousel({ images, title, alt }: ImageCarouselProps) {
+  const displayImages = images.slice(0, 2);
   const [activeIndex, setActiveIndex] = useState(0);
-  const activeImage = images[activeIndex] ?? images[0];
-  const hasMultipleImages = images.length > 1;
+  const [zoomOrigin, setZoomOrigin] = useState({ x: 50, y: 50 });
+  const activeImage = displayImages[activeIndex] ?? displayImages[0];
+  const hasMultipleImages = displayImages.length > 1;
+  const hasThumbnails = displayImages.length > 0;
+  const lightboxImages = displayImages.map((image, index) => ({
+    src: image,
+    alt: index === 0 ? alt : `${alt}, alternate view ${index + 1}`,
+  }));
+
+  if (!activeImage) {
+    return null;
+  }
 
   function showPrevious() {
-    setActiveIndex((current) => (current === 0 ? images.length - 1 : current - 1));
+    setActiveIndex((current) => (current === 0 ? displayImages.length - 1 : current - 1));
   }
 
   function showNext() {
-    setActiveIndex((current) => (current === images.length - 1 ? 0 : current + 1));
+    setActiveIndex((current) => (current === displayImages.length - 1 ? 0 : current + 1));
+  }
+
+  function handleZoomMove(event: MouseEvent<HTMLDivElement>) {
+    const rect = event.currentTarget.getBoundingClientRect();
+    setZoomOrigin({
+      x: ((event.clientX - rect.left) / rect.width) * 100,
+      y: ((event.clientY - rect.top) / rect.height) * 100,
+    });
   }
 
   return (
     <section className="reveal lg:sticky lg:top-28">
-      <div className="artwork-frame">
-        <div className="artwork-core">
-          <FlexibleImage
-            key={activeImage}
-            src={activeImage}
-            alt={activeIndex === 0 ? alt : `${alt}, alternate view ${activeIndex + 1}`}
-            priority={activeIndex === 0}
-            className="image-pad mx-auto"
-          />
+      <div className="artwork-viewer">
+        {hasThumbnails ? (
+          <div className="thumbnail-strip" aria-label={`${title} image thumbnails`}>
+            {displayImages.map((image, index) => (
+              <button
+                key={image}
+                type="button"
+                aria-label={`Show image ${index + 1} of ${title}`}
+                aria-current={activeIndex === index}
+                onClick={() => setActiveIndex(index)}
+                onContextMenu={(event) => event.preventDefault()}
+                className={`thumbnail-button ${activeIndex === index ? "is-active" : ""}`}
+              >
+                <FlexibleImage
+                  src={image}
+                  alt={index === 0 ? alt : `${alt}, alternate view ${index + 1}`}
+                  zoomable={false}
+                  className="p-1"
+                />
+              </button>
+            ))}
+          </div>
+        ) : null}
+
+        <div className="artwork-frame artwork-main-frame">
+          <div
+            className="artwork-core artwork-zoom-pane"
+            onMouseMove={handleZoomMove}
+            onMouseLeave={() => setZoomOrigin({ x: 50, y: 50 })}
+            style={
+              {
+                "--zoom-x": `${zoomOrigin.x}%`,
+                "--zoom-y": `${zoomOrigin.y}%`,
+              } as CSSProperties
+            }
+          >
+            <FlexibleImage
+              key={activeImage}
+              src={activeImage}
+              alt={activeIndex === 0 ? alt : `${alt}, alternate view ${activeIndex + 1}`}
+              priority={activeIndex === 0}
+              lightboxImages={lightboxImages}
+              lightboxIndex={activeIndex}
+              className="image-pad mx-auto"
+            />
+            {hasMultipleImages ? (
+              <>
+                <button
+                  type="button"
+                  onClick={showPrevious}
+                  className="icon-button carousel-arrow carousel-arrow-left"
+                  aria-label={`Show previous image of ${title}`}
+                >
+                  <ChevronLeftIcon />
+                </button>
+                <button
+                  type="button"
+                  onClick={showNext}
+                  className="icon-button carousel-arrow carousel-arrow-right"
+                  aria-label={`Show next image of ${title}`}
+                >
+                  <ChevronRightIcon />
+                </button>
+              </>
+            ) : null}
+          </div>
         </div>
       </div>
 
@@ -40,29 +117,18 @@ export function ImageCarousel({ images, title, alt }: ImageCarouselProps) {
         <div className="mt-5 flex flex-wrap items-center justify-between gap-4 border-t border-ink/10 pt-5">
           <div className="flex items-center gap-4">
             <span className="metadata-label">
-              {String(activeIndex + 1).padStart(2, "0")} / {String(images.length).padStart(2, "0")}
+              {String(activeIndex + 1).padStart(2, "0")} / {String(displayImages.length).padStart(2, "0")}
             </span>
-            <div className="flex gap-2">
-              {images.map((image, index) => (
-                <button
-                  key={image}
-                  type="button"
-                  aria-label={`Show image ${index + 1} of ${title}`}
-                  aria-current={activeIndex === index}
-                  onClick={() => setActiveIndex(index)}
-                  className={`h-2.5 rounded-full border border-ink/20 ${
-                    activeIndex === index ? "w-9 bg-ink" : "w-2.5 bg-transparent"
-                  }`}
-                />
-              ))}
-            </div>
+            <span className="text-sm text-graphite">Hover to inspect texture</span>
           </div>
           <div className="flex gap-2">
-            <button type="button" onClick={showPrevious} className="btn-secondary min-h-10 px-4 py-2">
-              Previous
+            <button type="button" onClick={showPrevious} className="btn-secondary min-h-11 px-4 py-2">
+              <ChevronLeftIcon className="h-4 w-4" />
+              <span className="sr-only">Previous</span>
             </button>
-            <button type="button" onClick={showNext} className="btn-secondary min-h-10 px-4 py-2">
-              Next
+            <button type="button" onClick={showNext} className="btn-secondary min-h-11 px-4 py-2">
+              <ChevronRightIcon className="h-4 w-4" />
+              <span className="sr-only">Next</span>
             </button>
           </div>
         </div>

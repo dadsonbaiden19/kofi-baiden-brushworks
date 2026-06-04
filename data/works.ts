@@ -4,128 +4,258 @@ export type Work = {
   year: string;
   medium: string;
   dimensions: string;
-  priceGhs: number;
+  priceGhs?: number;
+  priceLabel?: string;
   availability: "Available" | "Sold";
   alt: string;
   description: string;
   images: string[];
+  format?: "Landscape" | "Portrait" | "Square";
   featured?: boolean;
 };
 
-export const works: Work[] = [
-  {
-    slug: "ochre-field-no-3",
-    title: "Ochre Field No. 3",
-    year: "2026",
-    medium: "Oil, earth pigment, and graphite on linen",
-    dimensions: "60 x 48 in",
-    priceGhs: 8500,
-    availability: "Available",
-    alt: "Ochre Field No. 3 by Kofi Baiden, oil, earth pigment, and graphite on linen",
-    images: [
-      "/artworks/ochre-field.svg",
-      "/artworks/ochre-field-detail.svg",
-      "/artworks/ochre-field-installed.svg",
-    ],
-    featured: true,
+const requestDimensions = "Dimensions available on request";
+const requestPrice = "Price on inquiry";
+const originalPainting = "Original painting";
+const requestYear = "Year available on request";
+const contextPlaceholder = "/paintings/placeholder-context.svg";
+
+type WorkInput = Omit<Work, "year" | "medium" | "dimensions" | "priceLabel" | "alt" | "description"> &
+  Partial<Pick<Work, "year" | "medium" | "dimensions" | "priceLabel" | "alt" | "description">>;
+
+function createWork(work: WorkInput): Work {
+  const images =
+    work.images.length >= 2
+      ? work.images.slice(0, 2)
+      : [work.images[0] ?? "/paintings/placeholder-artwork.svg", contextPlaceholder];
+
+  return {
+    year: requestYear,
+    medium: originalPainting,
+    dimensions: requestDimensions,
+    priceLabel: requestPrice,
+    alt: `${work.title} by Kofi Baiden`,
     description:
-      "A measured field work where softened ochre planes meet gestural dark marks, inviting a slow reading of surface, weight, and quiet movement.",
-  },
-  {
-    slug: "after-the-rain",
-    title: "After the Rain",
-    year: "2025",
-    medium: "Acrylic and mineral wash on canvas",
-    dimensions: "72 x 54 in",
-    priceGhs: 12000,
-    availability: "Available",
-    alt: "After the Rain by Kofi Baiden, acrylic and mineral wash on canvas",
-    images: [
-      "/artworks/after-the-rain.svg",
-      "/artworks/after-the-rain-detail.svg",
-      "/artworks/after-the-rain-installed.svg",
-    ],
-    featured: true,
-    description:
-      "A contemplative composition built from translucent washes and dense vertical forms, reflecting the atmospheric calm that follows rainfall.",
-  },
-  {
-    slug: "harbor-memory",
-    title: "Harbor Memory",
-    year: "2025",
-    medium: "Oil and cold wax on panel",
-    dimensions: "48 x 40 in",
-    priceGhs: 7600,
-    availability: "Available",
-    alt: "Harbor Memory by Kofi Baiden, oil and cold wax on panel",
-    images: [
-      "/artworks/harbor-memory.svg",
-      "/artworks/harbor-memory-detail.svg",
-      "/artworks/harbor-memory-installed.svg",
-    ],
-    featured: true,
-    description:
-      "Layered blues and clay-toned passages form a compressed landscape of memory, place, and accumulated gesture.",
-  },
-  {
-    slug: "groundwork-study",
-    title: "Groundwork Study",
-    year: "2024",
-    medium: "Mixed media on handmade paper",
-    dimensions: "30 x 22 in",
-    priceGhs: 4200,
+      work.availability === "Available"
+        ? `${work.title} is an available original painting by Kofi Baiden, offered for collector inquiry.`
+        : `${work.title} is a sold original painting by Kofi Baiden, kept in the archive for close viewing.`,
+    ...work,
+    images,
+  };
+}
+
+export const soldWorks: Work[] = [
+  createWork({
+    slug: "9",
+    title: "9",
     availability: "Sold",
-    alt: "Groundwork Study by Kofi Baiden, mixed media on handmade paper",
-    images: [
-      "/artworks/groundwork-study.svg",
-      "/artworks/groundwork-study-detail.svg",
-      "/artworks/groundwork-study-installed.svg",
-    ],
-    description:
-      "A smaller work that studies the architecture of mark-making, balancing open paper with compact painted interventions.",
-  },
-  {
-    slug: "silent-red",
-    title: "Silent Red",
-    year: "2024",
-    medium: "Oil and pigment stick on canvas",
-    dimensions: "64 x 50 in",
-    priceGhs: 9800,
-    availability: "Available",
-    alt: "Silent Red by Kofi Baiden, oil and pigment stick on canvas",
-    images: [
-      "/artworks/silent-red.svg",
-      "/artworks/silent-red-detail.svg",
-      "/artworks/silent-red-installed.svg",
-    ],
-    description:
-      "A restrained red composition where atmosphere, erasure, and edge create a charged but meditative visual field.",
-  },
-  {
-    slug: "interior-light",
-    title: "Interior Light",
-    year: "2023",
-    medium: "Acrylic, sand, and oil pastel on linen",
-    dimensions: "52 x 42 in",
-    priceGhs: 6900,
-    availability: "Available",
-    alt: "Interior Light by Kofi Baiden, acrylic, sand, and oil pastel on linen",
-    images: [
-      "/artworks/interior-light.svg",
-      "/artworks/interior-light-detail.svg",
-      "/artworks/interior-light-installed.svg",
-    ],
-    description:
-      "Textural passages of pale pigment gather around a warm central glow, suggesting the held light of a quiet room.",
-  },
+    images: ["/paintings/9.png"],
+    format: "Portrait",
+  }),
+  createWork({
+    slug: "4",
+    title: "4",
+    availability: "Sold",
+    images: ["/paintings/4.png"],
+  }),
+  createWork({
+    slug: "3",
+    title: "3",
+    availability: "Sold",
+    images: ["/paintings/3.png"],
+  }),
+  createWork({
+    slug: "5",
+    title: "5",
+    availability: "Sold",
+    images: ["/paintings/5.png"],
+    format: "Portrait",
+  }),
+  createWork({
+    slug: "8",
+    title: "8",
+    availability: "Sold",
+    images: ["/paintings/8.png"],
+  }),
+  createWork({
+    slug: "12",
+    title: "12",
+    availability: "Sold",
+    images: ["/paintings/12.jpg"],
+    format: "Portrait",
+  }),
+  createWork({
+    slug: "20",
+    title: "20",
+    availability: "Sold",
+    images: ["/paintings/20.jpg"],
+    format: "Portrait",
+  }),
+  createWork({
+    slug: "11",
+    title: "11",
+    availability: "Sold",
+    images: ["/paintings/placeholder-artwork.svg"],
+    format: "Portrait",
+  }),
+  createWork({
+    slug: "jazz-tiles",
+    title: "Jazz Tiles",
+    availability: "Sold",
+    images: ["/paintings/jazz-tiles.jpg"],
+  }),
+  createWork({
+    slug: "jazz-poses",
+    title: "Jazz Poses",
+    year: "2022",
+    availability: "Sold",
+    images: ["/paintings/jazz-poses.jpg"],
+    format: "Landscape",
+  }),
+  createWork({
+    slug: "rush-hour",
+    title: "Rush Hour",
+    availability: "Sold",
+    images: ["/paintings/rush-hour.jpg"],
+  }),
+  createWork({
+    slug: "till-the-last-beat",
+    title: "Till the Last Beat",
+    availability: "Sold",
+    images: ["/paintings/till-the-last-beat.jpg"],
+  }),
+  createWork({
+    slug: "skill-and-beauty",
+    title: "Skill and Beauty",
+    availability: "Sold",
+    images: ["/paintings/skill-and-beauty.png"],
+  }),
+  createWork({
+    slug: "anticipation",
+    title: "Anticipation",
+    year: "2018",
+    availability: "Sold",
+    images: ["/paintings/anticipation.jpg"],
+  }),
+  createWork({
+    slug: "anticipation-2",
+    title: "Anticipation 2",
+    year: "2018",
+    availability: "Sold",
+    images: ["/paintings/anticipation-2.jpg"],
+  }),
+  createWork({
+    slug: "jazz-tunes",
+    title: "Jazz Tunes",
+    availability: "Sold",
+    images: ["/paintings/jazz-tunes.jpg"],
+  }),
+  createWork({
+    slug: "festive-time",
+    title: "Festive Time",
+    availability: "Sold",
+    images: ["/paintings/festive-time.jpg"],
+  }),
+  createWork({
+    slug: "twists-and-turns",
+    title: "Twists and Turns",
+    availability: "Sold",
+    images: ["/paintings/twists-and-turns.jpg"],
+  }),
+  createWork({
+    slug: "rhythmic-colours",
+    title: "Rhythmic Colours",
+    year: "2018",
+    availability: "Sold",
+    images: ["/paintings/rythmic-colours-2018.jpg"],
+  }),
+  createWork({
+    slug: "all-jazz",
+    title: "All Jazz",
+    availability: "Sold",
+    images: ["/paintings/all-jazz.jpg"],
+  }),
+  createWork({
+    slug: "1",
+    title: "1",
+    availability: "Sold",
+    images: ["/paintings/1.jpg"],
+  }),
 ];
+
+export const availableWorks: Work[] = [
+  createWork({
+    slug: "17",
+    title: "17",
+    availability: "Available",
+    images: ["/paintings/17.jpg"],
+    format: "Square",
+    featured: true,
+  }),
+  createWork({
+    slug: "19",
+    title: "19",
+    availability: "Available",
+    images: ["/paintings/19.jpg"],
+    format: "Square",
+    featured: true,
+  }),
+  createWork({
+    slug: "7",
+    title: "7",
+    availability: "Available",
+    images: ["/paintings/7.png"],
+    format: "Square",
+    featured: true,
+  }),
+  createWork({
+    slug: "6",
+    title: "6",
+    availability: "Available",
+    images: ["/paintings/6.png"],
+    format: "Landscape",
+  }),
+  createWork({
+    slug: "colour-acoustics",
+    title: "Colour Acoustics",
+    availability: "Available",
+    images: ["/paintings/colour-acoustics.jpg"],
+    format: "Portrait",
+  }),
+  createWork({
+    slug: "abibigroma",
+    title: "Abibigroma",
+    availability: "Available",
+    images: ["/paintings/abibigroma.jpg"],
+    format: "Landscape",
+  }),
+  createWork({
+    slug: "colour-ripples",
+    title: "Colour Ripples",
+    availability: "Available",
+    images: ["/paintings/colour-ripples.jpg"],
+    format: "Portrait",
+  }),
+];
+
+export const works: Work[] = [...availableWorks, ...soldWorks];
+
+export const homepageSoldWorks = ["9", "5", "12", "20", "11"]
+  .map((slug) => soldWorks.find((work) => work.slug === slug))
+  .filter((work): work is Work => Boolean(work));
+
+export const worksPageWorks: Work[] = [...availableWorks, ...homepageSoldWorks];
 
 export function getWork(slug: string) {
   return works.find((work) => work.slug === slug);
 }
 
-export const featuredWorks = works.filter((work) => work.featured);
+export const featuredWorks = availableWorks.filter((work) => work.featured);
 
-export function formatGhs(amount: number) {
+export function formatGhs(amount?: number, fallback = requestPrice) {
+  if (!amount || amount <= 0) {
+    return fallback;
+  }
+
   return `GHS ${amount.toLocaleString("en-GH")}`;
 }

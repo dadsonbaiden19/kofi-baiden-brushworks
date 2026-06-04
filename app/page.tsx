@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArtworkCard } from "@/components/ArtworkCard";
-import { ArtworkImage } from "@/components/ArtworkImage";
 import { CollectorNotes } from "@/components/CollectorNotes";
+import { FlexibleImage } from "@/components/FlexibleImage";
+import { MailIcon } from "@/components/Icons";
 import { SocialLinks } from "@/components/SocialLinks";
-import { featuredWorks } from "@/data/works";
+import { featuredWorks, formatGhs, getWork, homepageSoldWorks, type Work } from "@/data/works";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
@@ -15,40 +15,68 @@ export const metadata: Metadata = createPageMetadata({
 });
 
 export default function Home() {
-  const heroArtwork = featuredWorks[0];
+  const heroArtwork = getWork("jazz-poses") ?? featuredWorks[0];
+  const homepageWorks = [...featuredWorks, ...homepageSoldWorks];
 
   return (
     <main id="main-content">
-      <section className="page-shell grid min-h-[calc(100dvh-5rem)] gap-12 py-12 lg:grid-cols-[0.86fr_1.14fr] lg:items-center lg:py-20">
-        <div className="reveal max-w-3xl">
-          <p className="eyebrow">Contemporary artist</p>
-          <h1 className="mt-8 heading-display text-6xl sm:text-7xl lg:text-8xl">
-            <span className="block">Kofi Baiden</span>
-            <span className="block heading-muted">Brushworks</span>
-          </h1>
-          <p className="mt-8 max-w-xl text-lg leading-8 text-graphite">
-            Kofi Baiden is a Ghana-based contemporary visual artist creating restrained, tactile
-            works that hold memory, material, and atmosphere in quiet tension.
-          </p>
-          <div className="mt-10 flex flex-wrap gap-4">
-            <Link href="/works" className="btn-primary">
-              View works
+      <section className="home-hero-section group">
+        <HomeHoverArtwork
+          artwork={heroArtwork}
+          priority
+          maxImages={1}
+          wrapperClassName="home-hero-artwork"
+          className="home-hero-artwork-image"
+        />
+        <div className="page-shell home-hero-content">
+          <div className="reveal max-w-3xl">
+            <p className="eyebrow home-hero-eyebrow">Contemporary artist</p>
+            <h1 className="mt-7 heading-display home-hero-title text-6xl sm:text-7xl lg:text-8xl">
+              <span className="block">Kofi Baiden</span>
+              <span className="block">Brushworks</span>
+            </h1>
+            <p className="home-hero-copy mt-7 max-w-xl text-lg leading-8 text-chalk/90">
+              Original paintings shaped by rhythm, gesture, colour, and the quiet pressure of
+              lived experience in Ghana.
+            </p>
+          </div>
+          <div className="reveal reveal-delay-1 mt-10 flex flex-wrap gap-4">
+            <Link href="/works" className="btn-inverse">
+              View latest works
             </Link>
-            <Link href="/contact" className="btn-secondary">
+            <Link href="/contact" className="btn-hero-outline">
               Make an inquiry
             </Link>
           </div>
         </div>
-        <div className="reveal reveal-delay-2 lg:pl-10">
-          <ArtworkImage
-            src={heroArtwork.images[0]}
-            alt={`${heroArtwork.title} by Kofi Baiden`}
-            priority
-            className="shadow-artwork"
-          />
-          <p className="mt-4 text-sm text-umber">
-            {heroArtwork.title}, {heroArtwork.year}
-          </p>
+        <p className="home-hero-caption">
+          {heroArtwork.title} · {heroArtwork.year}
+        </p>
+      </section>
+
+      <section className="page-shell pt-4 pb-16 sm:pt-6 sm:pb-20">
+        <div className="home-process-grid">
+          <blockquote className="reveal home-quote">
+            “Behind every surface is a rhythm that asks to be felt before it is explained.”
+          </blockquote>
+          <div className="reveal reveal-delay-1 text-lg leading-8 text-graphite">
+            <p className="eyebrow">Works</p>
+            <h2 className="mt-5 heading text-5xl sm:text-6xl">
+              Handmade originals with colour, movement, and touch at the centre.
+            </h2>
+            <p className="mt-7">
+              Baiden&apos;s paintings are built through repeated marks, layered pigment, and
+              measured revisions. Texture gives the works their physical presence; rhythm gives
+              them their emotional charge.
+            </p>
+            <p className="mt-5">
+              For available works, commissions, or shipping questions, every conversation begins
+              directly with the studio.
+            </p>
+            <Link href="/contact" className="text-link mt-8">
+              Contact the studio
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -56,30 +84,19 @@ export default function Home() {
         <div className="page-shell">
           <div className="reveal flex flex-col justify-between gap-8 md:flex-row md:items-end">
             <div>
-              <p className="eyebrow">Featured artworks</p>
+              <p className="eyebrow">Latest artworks</p>
               <h2 className="mt-5 max-w-2xl heading text-5xl sm:text-6xl">
                 Recent works selected for close viewing.
               </h2>
             </div>
             <Link href="/works" className="text-link">
-              View all works
+              See more artworks
             </Link>
           </div>
-          <div className="mt-[4.5rem] grid gap-x-10 gap-y-16 lg:grid-cols-12">
-            {featuredWorks.map((artwork, index) => {
-              const placement =
-                index === 0
-                  ? "lg:col-span-6"
-                  : index === 1
-                    ? "lg:col-span-3 lg:pt-20"
-                    : "lg:col-span-3 lg:pt-8";
-
-              return (
-                <div key={artwork.slug} className={placement}>
-                  <ArtworkCard artwork={artwork} index={index} />
-                </div>
-              );
-            })}
+          <div className="home-latest-list">
+            {homepageWorks.map((artwork, index) => (
+              <HomeLatestArtwork key={artwork.slug} artwork={artwork} index={index} />
+            ))}
           </div>
         </div>
       </section>
@@ -125,5 +142,95 @@ export default function Home() {
         </div>
       </section>
     </main>
+  );
+}
+
+function HomeHoverArtwork({
+  artwork,
+  priority = false,
+  maxImages = 2,
+  wrapperClassName,
+  className,
+}: {
+  artwork: Work;
+  priority?: boolean;
+  maxImages?: number;
+  wrapperClassName?: string;
+  className?: string;
+}) {
+  const displayImages = artwork.images.slice(0, maxImages);
+  const lightboxImages = displayImages.map((image, imageIndex) => ({
+    src: image,
+    alt: imageIndex === 0 ? artwork.alt : `${artwork.alt}, alternate view ${imageIndex + 1}`,
+  }));
+
+  return (
+    <>
+      {displayImages.map((image, imageIndex) => (
+        <FlexibleImage
+          key={`${artwork.slug}-${imageIndex}-${image}`}
+          src={image}
+          alt={imageIndex === 0 ? artwork.alt : `${artwork.alt}, alternate view ${imageIndex + 1}`}
+          priority={priority}
+          lightboxImages={lightboxImages}
+          lightboxIndex={imageIndex}
+          wrapperClassName={
+            imageIndex === 0
+              ? wrapperClassName
+              : `${wrapperClassName ?? ""} work-preview-image work-preview-image-2`
+          }
+          className={className}
+        />
+      ))}
+    </>
+  );
+}
+
+function HomeLatestArtwork({ artwork, index }: { artwork: Work; index: number }) {
+  const isSold = artwork.availability === "Sold";
+  const formatClass = artwork.format ? `is-${artwork.format.toLowerCase()}` : "is-square";
+
+  return (
+    <article className={`home-latest-row reveal ${index % 2 === 1 ? "is-reversed" : ""}`}>
+      <div className="home-latest-copy">
+        <p className="metadata-label">
+          {String(index + 1).padStart(2, "0")} · {isSold ? "Sold work" : "Available work"}
+        </p>
+        <h3 className="mt-5 heading text-5xl sm:text-6xl">{artwork.title}</h3>
+        <div className="mt-6 grid gap-3 text-sm leading-6 text-graphite">
+          <p>{artwork.dimensions}</p>
+          <p>{artwork.medium}</p>
+          <p className="font-medium text-umber">{formatGhs(artwork.priceGhs, artwork.priceLabel)}</p>
+        </div>
+        <div className="mt-5 flex flex-wrap gap-2">
+          {artwork.format ? <span className="shop-tag">{artwork.format}</span> : null}
+        </div>
+        <div className="mt-8 flex flex-wrap gap-3">
+          <Link href={`/works/${artwork.slug}`} className="btn-secondary">
+            More info
+          </Link>
+          {isSold ? (
+            <span className="sold-action-label">Sold</span>
+          ) : (
+            <Link href={`/contact?artwork=${artwork.slug}`} className="btn-primary">
+              <MailIcon className="h-4 w-4" />
+              Inquire
+            </Link>
+          )}
+        </div>
+      </div>
+      <div className={`home-latest-media ${formatClass}`}>
+        <div className="artwork-frame group">
+          <div className="artwork-core">
+            <HomeHoverArtwork
+              artwork={artwork}
+              priority={index === 0}
+              className="image-pad home-latest-image"
+            />
+            {isSold ? <span className="sold-overlay-badge">Sold</span> : null}
+          </div>
+        </div>
+      </div>
+    </article>
   );
 }

@@ -4,6 +4,7 @@ import Script from "next/script";
 import "./globals.css";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { ImageLightboxProvider } from "@/components/ImageLightbox";
 import { JsonLd } from "@/components/JsonLd";
 import { absoluteSiteUrl, siteConfig } from "@/data/site";
 
@@ -91,42 +92,44 @@ export default function RootLayout({
         </Script>
       </head>
       <body className="font-sans antialiased">
-        <a href="#main-content" className="skip-link">
-          Skip to content
-        </a>
-        <JsonLd
-          data={{
-            "@context": "https://schema.org",
-            "@type": "WebSite",
-            name: siteConfig.name,
-            url: siteConfig.url,
-            description:
-              "Contemporary artist portfolio for Kofi Baiden Brushworks, based in Ghana.",
-            publisher: {
+        <ImageLightboxProvider>
+          <a href="#main-content" className="skip-link">
+            Skip to content
+          </a>
+          <JsonLd
+            data={{
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: siteConfig.name,
+              url: siteConfig.url,
+              description:
+                "Contemporary artist portfolio for Kofi Baiden Brushworks, based in Ghana.",
+              publisher: {
+                "@type": "Person",
+                name: "Kofi Baiden",
+              },
+            }}
+          />
+          <JsonLd
+            data={{
+              "@context": "https://schema.org",
               "@type": "Person",
               name: "Kofi Baiden",
-            },
-          }}
-        />
-        <JsonLd
-          data={{
-            "@context": "https://schema.org",
-            "@type": "Person",
-            name: "Kofi Baiden",
-            url: siteConfig.url,
-            jobTitle: "Contemporary Artist",
-            nationality: "Ghanaian",
-            address: {
-              "@type": "PostalAddress",
-              addressCountry: "GH",
-              addressLocality: "Accra",
-            },
-            sameAs: siteConfig.instagramUrl ? [siteConfig.instagramUrl] : undefined,
-          }}
-        />
-        <Header />
-        {children}
-        <Footer />
+              url: siteConfig.url,
+              jobTitle: "Contemporary Artist",
+              nationality: "Ghanaian",
+              address: {
+                "@type": "PostalAddress",
+                addressCountry: "GH",
+                addressLocality: "Accra",
+              },
+              sameAs: siteConfig.instagramUrl ? [siteConfig.instagramUrl] : undefined,
+            }}
+          />
+          <Header />
+          {children}
+          <Footer />
+        </ImageLightboxProvider>
       </body>
     </html>
   );

@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: ArtworkPageProps): Promise<Me
 
   return createPageMetadata({
     title: artwork.title,
-    description: `${artwork.title}, ${artwork.year}. ${artwork.medium}. ${artwork.dimensions}. ${formatGhs(artwork.priceGhs)}. ${artwork.availability}.`,
+    description: `${artwork.title}, ${artwork.year}. ${artwork.medium}. ${artwork.dimensions}. ${formatGhs(artwork.priceGhs, artwork.priceLabel)}. ${artwork.availability}.`,
     path: `/works/${artwork.slug}`,
     image: resolveImageUrl(artwork.images[0]),
   });
@@ -65,8 +65,12 @@ export default async function ArtworkDetailPage({ params }: ArtworkPageProps) {
           description: `${artwork.description} All artworks come with an authenticity certificate.`,
           offers: {
             "@type": "Offer",
-            price: artwork.priceGhs,
-            priceCurrency: "GHS",
+            ...(artwork.priceGhs
+              ? {
+                  price: artwork.priceGhs,
+                  priceCurrency: "GHS",
+                }
+              : {}),
             availability:
               artwork.availability === "Available"
                 ? "https://schema.org/InStock"

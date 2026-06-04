@@ -1,4 +1,8 @@
 import type { NextConfig } from "next";
+import { dirname } from "node:path";
+import { fileURLToPath } from "node:url";
+
+const projectRoot = dirname(fileURLToPath(import.meta.url));
 
 function configuredImageHost() {
   const imageBaseUrl = process.env.NEXT_PUBLIC_IMAGE_BASE_URL;
@@ -22,6 +26,7 @@ function configuredImageHost() {
 }
 
 const nextConfig: NextConfig = {
+  outputFileTracingRoot: projectRoot,
   images: {
     formats: ["image/avif", "image/webp"],
     qualities: [88, 90, 92],

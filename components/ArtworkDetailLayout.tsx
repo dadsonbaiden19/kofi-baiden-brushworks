@@ -37,7 +37,9 @@ export function ArtworkDetailLayout({ artwork }: { artwork: Work }) {
           </div>
           <div className="flex justify-between gap-6">
             <dt className="text-umber">Price</dt>
-            <dd className="text-right text-ink">{formatGhs(artwork.priceGhs)}</dd>
+            <dd className="text-right text-ink">
+              {formatGhs(artwork.priceGhs, artwork.priceLabel)}
+            </dd>
           </div>
         </dl>
         <div className="mt-8 max-w-lg">

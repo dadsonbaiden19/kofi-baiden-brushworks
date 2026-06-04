@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1500" role="img" aria-labelledby="title desc">
+  <title id="title">Artwork placeholder</title>
+  <desc id="desc">Temporary placeholder for an artwork image awaiting replacement.</desc>
+  <defs>
+    <linearGradient id="paper" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#f6efe2"/>
+      <stop offset="1" stop-color="#d9c7ad"/>
+    </linearGradient>
+    <linearGradient id="mark" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#20201d"/>
+      <stop offset="0.52" stop-color="#b47b4b"/>
+      <stop offset="1" stop-color="#54706a"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="1500" fill="url(#paper)"/>
+  <rect x="96" y="96" width="1008" height="1308" rx="20" fill="#fbf8f2" opacity="0.72"/>
+  <path d="M238 1050C352 715 458 445 686 342c136-62 270-30 332 78 63 110 14 270-122 400-188 180-416 254-658 230Z" fill="url(#mark)" opacity="0.28"/>
+  <path d="M236 860c148-164 305-244 470-240 118 3 215 48 302 132" fill="none" stroke="#191612" stroke-width="30" stroke-linecap="round" opacity="0.42"/>
+  <path d="M312 1078c216-58 406-58 570 0" fill="none" stroke="#b47b4b" stroke-width="44" stroke-linecap="round" opacity="0.5"/>
+  <text x="600" y="1280" text-anchor="middle" fill="#6f5845" font-family="Arial, sans-serif" font-size="38" letter-spacing="6">IMAGE COMING SOON</text>
+</svg>

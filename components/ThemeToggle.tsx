@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { MoonIcon, SunIcon } from "./Icons";
 
 type Theme = "light" | "dark";
 
@@ -38,14 +39,14 @@ export function ThemeToggle() {
       aria-label={`Switch to ${isDark ? "light" : "dark"} mode`}
       aria-pressed={isDark}
       onClick={() => updateTheme(isDark ? "light" : "dark")}
-      className="group relative inline-flex h-10 w-[4.75rem] items-center rounded-full border border-ink/15 bg-chalk/70 p-1 shadow-soft backdrop-blur-sm hover:-translate-y-0.5 hover:border-ink/25"
+      className="group relative inline-flex h-11 w-[5.25rem] items-center rounded-full border border-ink/15 bg-chalk/70 p-1 shadow-soft backdrop-blur-sm hover:-translate-y-0.5 hover:border-ink/25"
     >
       <span
-        className={`grid h-8 w-8 place-items-center rounded-full bg-ink text-[0.68rem] font-medium text-chalk shadow-soft transition-transform duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${
-          mounted && isDark ? "translate-x-[2.25rem]" : "translate-x-0"
+        className={`grid h-9 w-9 place-items-center rounded-full bg-ink text-chalk shadow-soft transition-transform duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          mounted && isDark ? "translate-x-[2.5rem]" : "translate-x-0"
         }`}
       >
-        {mounted && isDark ? "M" : "S"}
+        {mounted && isDark ? <MoonIcon /> : <SunIcon />}
       </span>
       <span className="sr-only">{isDark ? "Dark mode enabled" : "Light mode enabled"}</span>
     </button>

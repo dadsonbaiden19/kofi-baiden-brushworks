@@ -3,7 +3,9 @@ export const siteConfig = {
   domain: "kofibaidenbrushworks.com",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://kofibaidenbrushworks.com",
   imageBaseUrl: process.env.NEXT_PUBLIC_IMAGE_BASE_URL || "",
-  instagramUrl: process.env.NEXT_PUBLIC_INSTAGRAM_URL || "",
+  instagramUrl:
+    process.env.NEXT_PUBLIC_INSTAGRAM_URL ||
+    "https://www.instagram.com/kofibaiden.brushworks/?utm_source=ig_web_button_share_sheet",
   whatsappUrl: process.env.NEXT_PUBLIC_WHATSAPP_URL || "",
   whatsappMessage: "Hello, I'm interested in an artwork by Kofi Baiden.",
   ogImage: "/og-image.jpg",
