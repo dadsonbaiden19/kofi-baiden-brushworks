@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { CollectorNotes } from "@/components/CollectorNotes";
 import { FlexibleImage } from "@/components/FlexibleImage";
+import { HomeParallax } from "@/components/HomeParallax";
 import { MailIcon } from "@/components/Icons";
 import { SocialLinks } from "@/components/SocialLinks";
 import { featuredWorks, formatGhs, getWork, homepageSoldWorks, type Work } from "@/data/works";
@@ -20,6 +21,7 @@ export default function Home() {
 
   return (
     <main id="main-content">
+      <HomeParallax />
       <section className="home-hero-section group">
         <HomeHoverArtwork
           artwork={heroArtwork}
@@ -35,10 +37,6 @@ export default function Home() {
               <span className="block">Kofi Baiden</span>
               <span className="block">Brushworks</span>
             </h1>
-            <p className="home-hero-copy mt-7 max-w-xl text-lg leading-8 text-chalk/90">
-              Original paintings shaped by rhythm, gesture, colour, and the quiet pressure of
-              lived experience in Ghana.
-            </p>
           </div>
           <div className="reveal reveal-delay-1 mt-10 flex flex-wrap gap-4">
             <Link href="/works" className="btn-inverse">
