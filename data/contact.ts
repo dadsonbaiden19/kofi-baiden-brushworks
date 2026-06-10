@@ -1,7 +1,7 @@
 import { siteConfig } from "./site";
 
 export const studioContact = {
-  email: "studio@kofibaidenbrushworks.com",
+  email: "jkofibaiden@gmail.com",
   location: "Accra, Ghana",
   responseTime: "2-3 business days",
   instagramUrl: siteConfig.instagramUrl,

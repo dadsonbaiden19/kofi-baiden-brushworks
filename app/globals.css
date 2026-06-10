@@ -202,7 +202,7 @@ body::before {
 
   .site-brand-logo {
     display: block;
-    width: 2rem;
+    width: 2.35rem;
     height: auto;
     color: inherit;
     transition: color var(--duration-premium) var(--ease-premium);
@@ -210,6 +210,34 @@ body::before {
 
   .header-icon-link {
     @apply inline-grid;
+  }
+
+  .footer-logo-link {
+    @apply inline-flex min-h-11 max-w-[16rem] items-center rounded-xl text-ink hover:opacity-80;
+  }
+
+  .footer-logo {
+    display: block;
+    width: min(100%, 15rem);
+    height: auto;
+  }
+
+  .footer-logo-image {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .footer-logo-image-dark {
+    display: none;
+  }
+
+  .dark .footer-logo-image-light {
+    display: none;
+  }
+
+  .dark .footer-logo-image-dark {
+    display: block;
   }
 
   .header-nav-link {
@@ -961,6 +989,79 @@ body::before {
     bottom: auto;
     order: 3;
     margin: 1rem clamp(1.25rem, 6vw, 2rem) 0 auto;
+  }
+
+  .home-latest-list {
+    margin-top: 2.75rem;
+    gap: 3.75rem;
+  }
+
+  .home-latest-row {
+    gap: 1.5rem;
+    padding-top: 2rem;
+  }
+
+  .home-latest-copy .heading {
+    font-size: clamp(2.8rem, 14vw, 3.5rem);
+  }
+
+  .home-latest-copy .mt-5 {
+    margin-top: 1rem;
+  }
+
+  .home-latest-copy .mt-6 {
+    margin-top: 1rem;
+  }
+
+  .home-latest-copy .mt-8 {
+    margin-top: 1.25rem;
+  }
+
+  .home-latest-media,
+  .home-latest-media.is-square,
+  .home-latest-media.is-portrait,
+  .home-latest-media.is-landscape {
+    width: 100%;
+    max-width: 23rem;
+  }
+
+  .home-latest-media.is-portrait {
+    max-width: 20.5rem;
+  }
+
+  .home-latest-media.is-landscape {
+    max-width: 100%;
+  }
+
+  .home-latest-media .artwork-frame {
+    padding: 0.35rem;
+    border-radius: 1.25rem;
+  }
+
+  .home-latest-media .artwork-core {
+    aspect-ratio: auto;
+    border-radius: 0.95rem;
+  }
+
+  .home-latest-media .artwork-load-shell:not(.work-preview-image) {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: auto;
+  }
+
+  .home-latest-media .artwork-load-shell.work-preview-image {
+    height: 100%;
+  }
+
+  .home-latest-media .responsive-artwork-image {
+    height: auto;
+  }
+
+  .home-latest-image {
+    width: 100%;
+    max-height: none;
+    padding: clamp(0.45rem, 2.2vw, 0.7rem);
   }
 }
 

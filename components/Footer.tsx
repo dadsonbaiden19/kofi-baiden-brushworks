@@ -1,14 +1,36 @@
+import Image from "next/image";
 import Link from "next/link";
 import { SocialLinks } from "./SocialLinks";
 import { studioContact } from "@/data/contact";
+
+function FooterLogo() {
+  return (
+    <span className="footer-logo" aria-hidden="true">
+      <Image
+        src="/brand/footer-logo-light.svg"
+        alt=""
+        width={2150}
+        height={1400}
+        className="footer-logo-image footer-logo-image-light"
+      />
+      <Image
+        src="/brand/footer-logo-dark.svg"
+        alt=""
+        width={2150}
+        height={1400}
+        className="footer-logo-image footer-logo-image-dark"
+      />
+    </span>
+  );
+}
 
 export function Footer() {
   return (
     <footer className="border-t border-ink/10 bg-chalk/80">
       <div className="page-shell grid gap-12 py-12 md:grid-cols-[1fr_1.2fr]">
         <div>
-          <Link href="/" className="rounded-xl font-heading text-3xl tracking-[0.06em] hover:text-umber">
-            Kofi Baiden Brushworks
+          <Link href="/" className="footer-logo-link" aria-label="Kofi Baiden Brushworks home">
+            <FooterLogo />
           </Link>
           <p className="mt-5 max-w-sm text-sm leading-7 text-graphite">
             Ghana-based contemporary artist practice composed through pigment, layered surfaces,
