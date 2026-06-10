@@ -335,7 +335,7 @@ body::before {
   }
 
   .footer-logo-link {
-    @apply inline-flex min-h-11 max-w-[16rem] items-center rounded-xl text-ink hover:opacity-80;
+    @apply inline-flex min-h-11 max-w-[14rem] items-center rounded-xl text-ink hover:opacity-80 sm:max-w-[16rem];
     overflow: visible;
   }
 
@@ -349,13 +349,19 @@ body::before {
   .footer-logo {
     position: relative;
     display: block;
-    width: min(100%, 15rem);
+    width: min(100%, 12.75rem);
     height: auto;
     transform-origin: left center;
     animation: logo-mark-settle 1.45s 0.08s var(--ease-premium) both;
     transition:
       filter var(--duration-premium) var(--ease-premium),
       transform var(--duration-premium) var(--ease-premium);
+  }
+
+  @media (min-width: 640px) {
+    .footer-logo {
+      width: min(100%, 15rem);
+    }
   }
 
   .footer-logo-svg {
