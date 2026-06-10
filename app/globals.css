@@ -191,6 +191,23 @@ body::before {
     @apply inline-grid h-11 w-11 shrink-0 place-items-center rounded-full border border-ink/15 bg-chalk/70 text-ink shadow-soft backdrop-blur-sm hover:-translate-y-0.5 hover:border-ink/25 hover:bg-gallery/65;
   }
 
+  .site-brand {
+    @apply inline-grid h-11 w-11 shrink-0 place-items-center rounded-xl;
+  }
+
+  .site-brand-mark {
+    @apply grid h-11 w-11 shrink-0 place-items-center;
+    color: rgb(var(--color-ink));
+  }
+
+  .site-brand-logo {
+    display: block;
+    width: 2rem;
+    height: auto;
+    color: inherit;
+    transition: color var(--duration-premium) var(--ease-premium);
+  }
+
   .header-icon-link {
     @apply inline-grid;
   }

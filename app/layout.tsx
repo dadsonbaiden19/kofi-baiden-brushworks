@@ -36,6 +36,9 @@ export const metadata: Metadata = {
   description:
     "A refined contemporary artist portfolio for Ghana-based Kofi Baiden Brushworks, featuring available works, artist biography, commissions, exhibitions, and acquisitions.",
   keywords: siteConfig.keywords,
+  icons: {
+    icon: "/brand/kb-icon.svg",
+  },
   alternates: {
     canonical: siteConfig.url,
   },
