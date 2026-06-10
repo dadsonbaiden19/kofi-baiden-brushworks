@@ -37,11 +37,7 @@ export function Footer() {
           <Link href="/" className="footer-logo-link" aria-label="Kofi Baiden Brushworks home">
             <FooterLogo />
           </Link>
-          <p className="mt-4 max-w-sm text-xs leading-6 text-graphite sm:mt-5 sm:text-sm sm:leading-7">
-            Ghana-based contemporary artist practice composed through pigment, layered surfaces,
-            drawing, and a quiet attention to memory, land, and interior light.
-          </p>
-          <SocialLinks className="mt-4 sm:mt-6" />
+          <SocialLinks className="mt-4" />
         </div>
         <div className="grid gap-5 text-xs sm:grid-cols-3 sm:gap-8 sm:text-sm">
           <div>
