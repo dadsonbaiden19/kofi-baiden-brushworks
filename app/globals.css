@@ -195,6 +195,12 @@ body::before {
     @apply inline-grid h-11 w-11 shrink-0 place-items-center rounded-xl;
   }
 
+  .site-brand:hover .site-brand-logo,
+  .site-brand:focus-visible .site-brand-logo {
+    filter: drop-shadow(0 0 0.6rem rgb(253 186 18 / 0.2));
+    transform: translateY(-1px) scale(1.06);
+  }
+
   .site-brand-mark {
     @apply grid h-11 w-11 shrink-0 place-items-center;
     color: rgb(var(--color-ink));
@@ -205,7 +211,40 @@ body::before {
     width: 2.35rem;
     height: auto;
     color: inherit;
-    transition: color var(--duration-premium) var(--ease-premium);
+    overflow: visible;
+    transform-origin: center;
+    transition:
+      color var(--duration-premium) var(--ease-premium),
+      filter var(--duration-premium) var(--ease-premium),
+      transform var(--duration-premium) var(--ease-premium);
+  }
+
+  .site-brand-letter,
+  .site-brand-dot {
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+
+  .site-brand-letter {
+    opacity: 0;
+    transform: translateY(0.32rem) scaleY(0.92);
+    animation: logo-letter-rise 0.9s var(--ease-premium) forwards;
+  }
+
+  .site-brand-letter-k {
+    animation-delay: 0.12s;
+  }
+
+  .site-brand-letter-b {
+    animation-delay: 0.25s;
+  }
+
+  .site-brand-dot {
+    opacity: 0;
+    transform: scale(0.38);
+    animation:
+      logo-dot-land 0.78s 0.68s var(--ease-premium) forwards,
+      logo-dot-breathe 3.6s 1.7s var(--ease-premium) infinite;
   }
 
   .header-icon-link {
@@ -216,10 +255,38 @@ body::before {
     @apply inline-flex min-h-11 max-w-[16rem] items-center rounded-xl text-ink hover:opacity-80;
   }
 
+  .footer-logo-link:hover .footer-logo,
+  .footer-logo-link:focus-visible .footer-logo {
+    filter: drop-shadow(0 1rem 1.7rem rgb(var(--color-clay) / 0.16));
+    transform: translateY(-2px) scale(1.025);
+  }
+
   .footer-logo {
+    position: relative;
     display: block;
     width: min(100%, 15rem);
     height: auto;
+    transform-origin: left center;
+    animation: footer-logo-reveal 1.05s 0.12s var(--ease-premium) both;
+    transition:
+      filter var(--duration-premium) var(--ease-premium),
+      transform var(--duration-premium) var(--ease-premium);
+  }
+
+  .footer-logo::after {
+    content: "";
+    position: absolute;
+    left: 38.5%;
+    top: 58%;
+    width: 12%;
+    aspect-ratio: 1;
+    border-radius: 999px;
+    background: rgb(253 186 18 / 0.5);
+    filter: blur(0.45rem);
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, -50%) scale(0.35);
+    animation: footer-logo-glow 3.8s 1.2s var(--ease-premium) infinite;
   }
 
   .footer-logo-image {
@@ -1098,6 +1165,82 @@ body::before {
   }
 }
 
+@keyframes logo-letter-rise {
+  0% {
+    opacity: 0;
+    transform: translateY(0.32rem) scaleY(0.92);
+  }
+  58% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scaleY(1);
+  }
+}
+
+@keyframes logo-dot-land {
+  0% {
+    opacity: 0;
+    filter: drop-shadow(0 0 0 rgb(253 186 18 / 0));
+    transform: translateX(0.45rem) scale(0.38);
+  }
+  62% {
+    opacity: 1;
+    filter: drop-shadow(0 0 0.75rem rgb(253 186 18 / 0.52));
+    transform: translateX(0) scale(1.12);
+  }
+  100% {
+    opacity: 1;
+    filter: drop-shadow(0 0 0.2rem rgb(253 186 18 / 0.2));
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes logo-dot-breathe {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 0.2rem rgb(253 186 18 / 0.18));
+    transform: scale(1);
+  }
+  45% {
+    filter: drop-shadow(0 0 0.8rem rgb(253 186 18 / 0.38));
+    transform: scale(1.045);
+  }
+}
+
+@keyframes footer-logo-reveal {
+  0% {
+    clip-path: inset(0 100% 0 0);
+    opacity: 0;
+    transform: translateY(0.35rem);
+  }
+  44% {
+    opacity: 1;
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes footer-logo-glow {
+  0%,
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.35);
+  }
+  38% {
+    opacity: 0.36;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  64% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.5);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -1135,5 +1278,17 @@ body::before {
   .home-latest-media .artwork-frame {
     transform: none !important;
     will-change: auto;
+  }
+
+  .site-brand-logo,
+  .site-brand-letter,
+  .site-brand-dot,
+  .footer-logo,
+  .footer-logo::after {
+    animation: none !important;
+    clip-path: none !important;
+    filter: none !important;
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
