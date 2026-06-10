@@ -1,26 +1,31 @@
-import Image from "next/image";
+import { readFileSync } from "node:fs";
+import path from "node:path";
 import Link from "next/link";
 import { SocialLinks } from "./SocialLinks";
 import { studioContact } from "@/data/contact";
 
+const footerLogoSvg = readFileSync(
+  path.join(process.cwd(), "public", "brand", "footer-logo-light.svg"),
+  "utf8",
+)
+  .replace(
+    "<svg ",
+    '<svg class="footer-logo-svg" aria-hidden="true" focusable="false" ',
+  )
+  .replaceAll("fill:#171512", "fill:currentColor")
+  .replaceAll("stroke:#171512", "stroke:currentColor")
+  .replace(/<text\s/g, '<text class="footer-logo-fill" ')
+  .replace(/<path\s(?=[^>]*fill:currentColor)/g, '<path class="footer-logo-fill" ')
+  .replace(/<path\s(?=[^>]*stroke:currentColor)/g, '<path class="footer-logo-draw" pathLength="1" ')
+  .replace(/<path\s(?=[^>]*#fdba12)/g, '<path class="footer-logo-dot" ');
+
 function FooterLogo() {
   return (
-    <span className="footer-logo" aria-hidden="true">
-      <Image
-        src="/brand/footer-logo-light.svg"
-        alt=""
-        width={2150}
-        height={1400}
-        className="footer-logo-image footer-logo-image-light"
-      />
-      <Image
-        src="/brand/footer-logo-dark.svg"
-        alt=""
-        width={2150}
-        height={1400}
-        className="footer-logo-image footer-logo-image-dark"
-      />
-    </span>
+    <span
+      className="footer-logo"
+      aria-hidden="true"
+      dangerouslySetInnerHTML={{ __html: footerLogoSvg }}
+    />
   );
 }
 

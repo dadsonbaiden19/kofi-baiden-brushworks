@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint . --max-warnings=0"
+    "lint": "eslint . --max-warnings=0",
+    "content:check": "node scripts/validate-artworks.mjs"
   },
   "dependencies": {
     "next": "^15.0.0",

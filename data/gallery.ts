@@ -9,7 +9,7 @@ export type GalleryWork = {
   availability: "Sold";
 };
 
-export const galleryWorks: GalleryWork[] = soldWorks.filter((work) => work.slug !== "11").map((work) => ({
+export const galleryWorks: GalleryWork[] = soldWorks.filter((work) => work.showInGallery !== false).map((work) => ({
   slug: work.slug,
   title: work.title,
   year: work.year,

@@ -36,15 +36,23 @@ NEXT_PUBLIC_WHATSAPP_URL=
 
 ## Artwork And Image Data
 
-Current works live in `data/works.ts`.
+Current artwork content lives in `data/works.json`.
 
-Historical gallery works live in `data/gallery.ts`.
+Artwork display logic lives in `data/works.ts`.
 
-Artwork data stores relative image paths such as `/artworks/ochre-field.svg`. The app combines those paths with `NEXT_PUBLIC_IMAGE_BASE_URL` through `lib/images.ts`. This keeps the project ready for Hostinger file storage, Cloudinary, Uploadcare, ImageKit, or a future CDN without scattering full image URLs through components.
+The full non-technical editing guide lives in `ARTWORK-CONTENT-GUIDE.md`.
+
+Artwork data stores relative image paths such as `/paintings/colour-ripples.jpg`. The app combines those paths with `NEXT_PUBLIC_IMAGE_BASE_URL` through `lib/images.ts`. This keeps the project ready for Hostinger file storage, Cloudinary, Uploadcare, ImageKit, or a future CDN without scattering full image URLs through components.
+
+To check artwork content after editing:
+
+```bash
+npm run content:check
+```
 
 When moving images to a CDN:
 
-1. Upload images while preserving paths like `/artworks/file-name.jpg`.
+1. Upload images while preserving paths like `/paintings/file-name.jpg`.
 2. Set `NEXT_PUBLIC_IMAGE_BASE_URL` to the CDN folder URL.
 3. Add the CDN hostname to `next.config.ts` under `images.remotePatterns` if it is not already covered.
 4. Replace placeholder SVG paths with final artwork image filenames in the data files.
