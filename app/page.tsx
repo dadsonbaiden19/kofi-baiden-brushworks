@@ -53,28 +53,19 @@ export default function Home() {
       </section>
 
       <section className="page-shell pt-4 pb-16 sm:pt-6 sm:pb-20">
-        <div className="home-process-grid">
-          <blockquote className="reveal home-quote">
-            “Behind every surface is a rhythm that asks to be felt before it is explained.”
-          </blockquote>
-          <div className="reveal reveal-delay-1 text-lg leading-8 text-graphite">
-            <p className="eyebrow">Works</p>
-            <h2 className="mt-5 heading text-5xl sm:text-6xl">
-              Handmade originals with colour, movement, and touch at the centre.
-            </h2>
-            <p className="mt-7">
-              Baiden&apos;s paintings are built through repeated marks, layered pigment, and
-              measured revisions. Texture gives the works their physical presence; rhythm gives
-              them their emotional charge.
-            </p>
-            <p className="mt-5">
-              For available works, commissions, or shipping questions, every conversation begins
-              directly with the studio.
-            </p>
-            <Link href="/contact" className="text-link mt-8">
-              Contact the studio
-            </Link>
-          </div>
+        <div className="reveal max-w-4xl text-lg leading-8 text-graphite">
+          <p className="eyebrow">Works</p>
+          <h2 className="mt-5 heading text-5xl sm:text-6xl">
+            Handmade originals with colour, movement, and touch at the centre.
+          </h2>
+          <p className="mt-7">
+            Baiden&apos;s paintings are built through repeated marks, layered pigment, and measured
+            revisions. Texture gives the works their physical presence; rhythm gives them their
+            emotional charge.
+          </p>
+          <Link href="/contact" className="text-link mt-8">
+            Contact the studio
+          </Link>
         </div>
       </section>
 
@@ -199,9 +190,6 @@ function HomeLatestArtwork({ artwork, index }: { artwork: Work; index: number })
           <p>{artwork.dimensions}</p>
           <p>{artwork.medium}</p>
           <p className="font-medium text-umber">{formatGhs(artwork.priceGhs, artwork.priceLabel)}</p>
-        </div>
-        <div className="mt-5 flex flex-wrap gap-2">
-          {artwork.format ? <span className="shop-tag">{artwork.format}</span> : null}
         </div>
         <div className="mt-8 flex flex-wrap gap-3">
           <Link href={`/works/${artwork.slug}`} className="btn-secondary">

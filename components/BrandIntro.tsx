@@ -1,0 +1,96 @@
+"use client";
+
+import Image from "next/image";
+import { useEffect, useState } from "react";
+
+const introStorageKey = "kofi-baiden-brand-intro-seen";
+
+function IntroKbLogo() {
+  return (
+    <svg
+      className="brand-intro-kb-logo"
+      viewBox="0 0 1362 965"
+      role="presentation"
+      aria-hidden="true"
+      focusable="false"
+      fillRule="evenodd"
+      clipRule="evenodd"
+    >
+      <path
+        className="brand-intro-kb-piece brand-intro-kb-k"
+        d="M87.317,862.609l71.975,0l0,-251.846l281.717,251.846l101.304,0l-325.438,-292.533l307.446,-266.829l-105.692,0l-259.337,225.75l0,-441.679l-71.975,0l0,775.292Z"
+        fill="currentColor"
+      />
+      <path
+        className="brand-intro-kb-piece brand-intro-kb-b"
+        d="M590.821,862.609l0,-102.825c28.417,39.075 61.117,68.379 98.1,87.917c36.975,19.533 78.233,29.304 123.775,29.304c79.429,0 147.396,-28.613 203.896,-85.858c56.496,-57.237 84.746,-126.296 84.746,-207.192c0,-81.913 -27.992,-151.575 -83.975,-208.988c-55.983,-57.408 -123.517,-86.112 -202.612,-86.112c-44.517,0 -85.433,9.171 -122.754,27.5c-37.321,18.342 -71.054,46.017 -101.175,83.033l0,-312.071l-71.975,-0l0,775.292l71.975,0Zm58.712,-120.304c-42.575,-43.521 -63.854,-97.679 -63.854,-162.458c0,-42.5 9.487,-80.717 28.471,-114.65c18.971,-33.933 46.158,-60.925 81.55,-80.975c35.392,-20.05 72.75,-30.075 112.075,-30.075c38.642,0 74.971,10.025 109,30.075c34.025,20.05 61.117,48.071 81.3,84.058c20.171,35.988 30.258,73.867 30.258,113.621c0,39.762 -10.004,77.462 -30.008,113.104c-20.004,35.654 -46.933,63.329 -80.783,83.029c-33.85,19.717 -70.788,29.567 -110.792,29.567c-62.242,0 -114.637,-21.767 -157.217,-65.296Z"
+        fill="currentColor"
+      />
+      <path
+        className="brand-intro-kb-dot"
+        d="M1253.257,690.221c-61.092,-0.471 -115.087,60.625 -103.833,121.438c7.517,56.546 65.438,100.408 121.967,90.471c57.562,-8.108 100.996,-68.879 88.392,-125.979c-8.792,-50.417 -55.675,-87.288 -106.525,-85.929Z"
+        fill="#fdba12"
+      />
+    </svg>
+  );
+}
+
+export function BrandIntro() {
+  const [isVisible, setIsVisible] = useState(false);
+  const [isExiting, setIsExiting] = useState(false);
+
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const shouldReplay = new URLSearchParams(window.location.search).get("intro") === "1";
+
+    if (prefersReducedMotion || (!shouldReplay && sessionStorage.getItem(introStorageKey))) {
+      return;
+    }
+
+    if (!shouldReplay) {
+      sessionStorage.setItem(introStorageKey, "true");
+    }
+    setIsVisible(true);
+
+    const exitTimer = window.setTimeout(() => {
+      setIsExiting(true);
+    }, 2750);
+    const removeTimer = window.setTimeout(() => {
+      setIsVisible(false);
+    }, 3350);
+
+    return () => {
+      window.clearTimeout(exitTimer);
+      window.clearTimeout(removeTimer);
+    };
+  }, []);
+
+  if (!isVisible) {
+    return null;
+  }
+
+  return (
+    <div
+      className={`brand-intro ${isExiting ? "is-exiting" : ""}`}
+      role="status"
+      aria-live="polite"
+      aria-label="Loading Kofi Baiden Brushworks"
+    >
+      <div className="brand-intro-stage" aria-hidden="true">
+        <span className="brand-intro-glow" />
+        <IntroKbLogo />
+        <Image
+          src="/brand/footer-logo-dark.svg"
+          alt=""
+          width={2150}
+          height={1400}
+          priority
+          aria-hidden="true"
+          draggable={false}
+          className="brand-intro-full-logo"
+        />
+      </div>
+      <span className="sr-only">Loading Kofi Baiden Brushworks</span>
+    </div>
+  );
+}

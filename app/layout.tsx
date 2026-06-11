@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Bebas_Neue, Cormorant_Garamond, Inter } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
+import { BrandIntro } from "@/components/BrandIntro";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { ImageLightboxProvider } from "@/components/ImageLightbox";
@@ -82,13 +83,22 @@ export default function RootLayout({
         <Script id="theme-init" strategy="beforeInteractive">
           {`(() => {
             try {
+              const root = document.documentElement;
               const stored = localStorage.getItem("theme");
               const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
               const theme = stored || (systemDark ? "dark" : "light");
-              document.documentElement.classList.toggle("dark", theme === "dark");
-              document.documentElement.dataset.theme = theme;
+              const ua = window.navigator.userAgent;
+              const lowerUA = ua.toLowerCase();
+              const isIOS =
+                /ipad|iphone|ipod/.test(lowerUA) ||
+                (window.navigator.platform === "MacIntel" && window.navigator.maxTouchPoints > 1);
+              const isSafari = /safari/.test(lowerUA) && !/chrome|crios|android|fxios|edgios/.test(lowerUA);
+              root.classList.toggle("dark", theme === "dark");
+              root.classList.toggle("is-ios", isIOS);
+              root.classList.toggle("is-safari", isSafari);
+              root.dataset.theme = theme;
             } catch {
-              document.documentElement.classList.remove("dark");
+              document.documentElement.classList.remove("dark", "is-ios", "is-safari");
               document.documentElement.dataset.theme = "light";
             }
           })();`}
@@ -96,6 +106,7 @@ export default function RootLayout({
       </head>
       <body className="font-sans antialiased">
         <ImageLightboxProvider>
+          <BrandIntro />
           <a href="#main-content" className="skip-link">
             Skip to content
           </a>

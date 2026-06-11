@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { CollectorNotes } from "@/components/CollectorNotes";
 import { WorksShop } from "@/components/WorksShop";
 import { worksPageWorks } from "@/data/works";
 import { createPageMetadata } from "@/lib/seo";
@@ -20,12 +19,8 @@ export default function WorksPage() {
           Catalogue of works
         </h1>
         <p className="mt-6 text-lg leading-8 text-graphite">
-          Browse current and selected sold paintings by format, title, and availability. Available
-          works begin with direct studio inquiry.
+          Search current and selected sold paintings by title, medium, dimensions, or availability.
         </p>
-      </div>
-      <div className="reveal reveal-delay-1 mt-10 max-w-4xl">
-        <CollectorNotes />
       </div>
       <WorksShop works={worksPageWorks} />
     </main>

@@ -24,6 +24,9 @@ export function HomeParallax() {
 
     const desktopMedia = window.matchMedia(desktopQuery);
     const reducedMotionMedia = window.matchMedia(reducedMotionQuery);
+    const isIOS =
+      /iPad|iPhone|iPod/.test(window.navigator.userAgent) ||
+      (window.navigator.platform === "MacIntel" && window.navigator.maxTouchPoints > 1);
     let frame = 0;
 
     function resetParallax() {
@@ -37,7 +40,7 @@ export function HomeParallax() {
     function updateParallax() {
       frame = 0;
 
-      if (!desktopMedia.matches || reducedMotionMedia.matches) {
+      if (!desktopMedia.matches || reducedMotionMedia.matches || isIOS) {
         resetParallax();
         return;
       }
